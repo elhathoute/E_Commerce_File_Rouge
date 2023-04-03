@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('layout.master');
+});
+Route::get('/navbar', function () {
     return view('navbar');
+});
+Route::get('/main', function () {
+    return view('main');
 });
 
 Route::get('/product-card', function () {

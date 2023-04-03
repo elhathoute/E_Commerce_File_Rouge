@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
-<title>Surfside Media</title>
+<title>My Shoes</title>
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +11,9 @@
 <meta property="og:type" content="">
 <meta property="og:url" content="">
 <meta property="og:image" content="">
-<link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.ico">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/custom.css"></head>
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/logo-website.svg') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"></head>
 
 <body>
     <header class="header-area header-style-1 header-height-2">
@@ -459,7 +459,11 @@
                             </div>
                             <div class="col-lg-7 col-md-6">
                                 <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated slider-1-1" src="assets/imgs/slider/slider-1.png" alt="">
+                                    {{-- <img class="animated slider-1-1" src="assets/imgs/slider/slider-1.png" alt=""> --}}
+                                    <video class="mobile-video" autoplay="true" playsinline="" preload="auto" muted="true" loop="" width="100%">
+                                        <source src="https://files-bs.b-cdn.net/video/2023/0317/march_hero_mobile_767x928720p.mp4" type="video/mp4">
+                                        Sorry, your browser doesn't support embedded videos.
+                                    </video>
                                 </div>
                             </div>
                         </div>
@@ -479,7 +483,12 @@
                             </div>
                             <div class="col-lg-7 col-md-6">
                                 <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated slider-1-2" src="assets/imgs/slider/slider-2.png" alt="">
+
+                                    {{-- <img class="animated slider-1-2" src="assets/imgs/slider/slider-2.png" alt=""> --}}
+                                    <video class="mobile-video" autoplay="true" playsinline="" preload="auto" muted="true" loop="" width="100%">
+                                        <source src="https://files-bs.b-cdn.net/video/2023/0317/march_hero_mobile_767x928720p.mp4" type="video/mp4">
+                                        Sorry, your browser doesn't support embedded videos.
+                                    </video>
                                 </div>
                             </div>
                         </div>
@@ -1912,8 +1921,8 @@
                     </div>
                     <div class="col-lg-5  mob-center">
                         <div class="row">
-                            <div class="col-md-8 ">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4770.295791572991!2d-7.515675695124955!3d33.622187538275796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda632ee63dcf59f%3A0x438b1601f486f226!2sPretty%20Shoes(fabricant%20de%20chaussure)!5e0!3m2!1sfr!2sma!4v1680389141493!5m2!1sfr!2sma" width="400" height="200" style="border:0; margin-top: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <div class="col-md-8 shoes-cart-adress">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4770.295791572991!2d-7.515675695124955!3d33.622187538275796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda632ee63dcf59f%3A0x438b1601f486f226!2sPretty%20Shoes(fabricant%20de%20chaussure)!5e0!3m2!1sfr!2sma!4v1680389141493!5m2!1sfr!2sma" width="100%" height="200" style="border:0; margin-top: 15px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
 
                         </div>
@@ -1933,35 +1942,36 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
-                        &copy; <strong class="text-brand">SurfsideMedia</strong> All rights reserved
+                        &copy; <strong class="text-brand">My Shoes 2023</strong> All rights reserved
                     </p>
                 </div>
             </div>
         </div>
     </footer>
     <!-- Vendor JS-->
-<script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
-<script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="assets/js/plugins/slick.js"></script>
-<script src="assets/js/plugins/jquery.syotimer.min.js"></script>
-<script src="assets/js/plugins/wow.js"></script>
-<script src="assets/js/plugins/jquery-ui.js"></script>
-<script src="assets/js/plugins/perfect-scrollbar.js"></script>
-<script src="assets/js/plugins/magnific-popup.js"></script>
-<script src="assets/js/plugins/select2.min.js"></script>
-<script src="assets/js/plugins/waypoints.js"></script>
-<script src="assets/js/plugins/counterup.js"></script>
-<script src="assets/js/plugins/jquery.countdown.min.js"></script>
-<script src="assets/js/plugins/images-loaded.js"></script>
-<script src="assets/js/plugins/isotope.js"></script>
-<script src="assets/js/plugins/scrollup.js"></script>
-<script src="assets/js/plugins/jquery.vticker-min.js"></script>
-<script src="assets/js/plugins/jquery.theia.sticky.js"></script>
-<script src="assets/js/plugins/jquery.elevatezoom.js"></script>
+<script src="{{asset('assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/vendor/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets/js/vendor/jquery-migrate-3.3.0.min.js')}}"></script>
+<script src="{{asset('assets/js/vendor/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/slick.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.syotimer.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/wow.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery-ui.js')}}"></script>
+<script src="{{asset('assets/js/plugins/perfect-scrollbar.js')}}"></script>
+<script src="{{asset('assets/js/plugins/magnific-popup.js')}}"></script>
+<script src="{{asset('assets/js/plugins/select2.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/waypoints.js')}}"></script>
+<script src="{{asset('assets/js/plugins/counterup.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.countdown.min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/images-loaded.js')}}"></script>
+<script src="{{asset('assets/js/plugins/isotope.js')}}"></script>
+<script src="{{asset('assets/js/plugins/scrollup.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.vticker-min.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.theia.sticky.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.elevatezoom.js')}}"></script>
 <!-- Template  JS -->
-<script src="assets/js/main.js?v=3.3"></script>
-<script src="assets/js/shop.js?v=3.3"></script></body>
+<script src="{{ 'assets/js/main.js?v=3.3'}}"></script>
+<script src="{{ 'assets/js/shop.js?v=3.3'}}"></script>
+</body>
 
 </html>
