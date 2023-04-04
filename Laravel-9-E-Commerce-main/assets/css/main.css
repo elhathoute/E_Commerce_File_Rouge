@@ -694,7 +694,7 @@ strong,
   font-size: 16px;
 }
 
-.section-title.style-1::after {
+ .section-title.style-1::after {
   content: "";
   width: 50px;
   height: 2px;

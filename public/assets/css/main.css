@@ -8,6 +8,22 @@
 @import url(plugins/slick.css);
 @import url(plugins/perfect-scrollbar.css);
 /*ABdelaziz*/
+body{
+    background-color:white !important;
+}
+.contact-us{
+    width: 100%;
+    background-image: url(https://img6.shoes.fr/images/mobile/home/home_newCo_PE23.jpg);
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.contact-us textarea{
+    min-height: 150px !important;
+}
+.main{
+    border-bottom: 1px solid #cccccc;
+}
 .mobile-video{
     border-radius: 60px;
     border: 1px solid #f46e2f;
@@ -700,15 +716,6 @@ strong,
   font-size: 16px;
 }
 
-.section-title.style-1::after {
-  content: "";
-  width: 50px;
-  height: 2px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: #F15412;
-}
 
 .section-title span {
   color: #F15412;
@@ -1024,9 +1031,11 @@ input {
   width: 100%;
 }
 
-input:focus {
-  background: transparent;
+input:focus,textarea:focus{
+  /* background: transparent;*/
   border: 1px solid #88c1be;
+  color: white;
+  background-color: black;
 }
 
 input.square {
@@ -1062,11 +1071,11 @@ textarea {
   width: 100%;
   min-height: 200px;
 }
-
+/*
 textarea:focus {
   background: transparent;
   border: 1px solid #88c1be;
-}
+} */
 
 .select2-container--default .select2-selection--single {
   background-color: #fff;
@@ -2848,7 +2857,7 @@ table .product-thumbnail img {
   line-height: 1;
 }
 
-.bg-square {
+/* .bg-square {
   position: absolute;
   left: auto;
   top: 150px;
@@ -2862,7 +2871,7 @@ table .product-thumbnail img {
   background-color: #f3fbf5;
   z-index: -1;
   max-height: 1200px;
-}
+} */
 
 .mobile-promotion {
   display: none;
@@ -5403,8 +5412,8 @@ h6.post-title {
 
 .header-action-2 .header-action-icon-2 > a span.pro-count {
   position: absolute;
-  right: -11px;
-  top: -5px;
+ left:12px;
+  top: -4px;
   color: #ffffff;
   height: 18px;
   width: 18px;
