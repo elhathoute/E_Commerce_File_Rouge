@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,14 @@ Route::get('/contact', function () {
 Route::get('/login', function () {
     return view('e-commerce.login');
 })->name('e-commerce.login');
-Route::get('/register', function () {
-    return view('e-commerce.register');
-})->name('e-commerce.register');
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('register','register')->name('e-commerce.register');
+    Route::post('registerUser','registerUser')->name('e-commerce.register_user');
+});
+// Route::get('/register', function () {
+//     return view('e-commerce.register');
+// })->name('e-commerce.register');
 // Route::get('/navbar', function () {
 //     return view('navbar');
 // });
@@ -60,4 +66,5 @@ Route::get('/add-to-card', function () {
 Route::get('/reviews', function () {
     return view('reviews');
 });
+
 
