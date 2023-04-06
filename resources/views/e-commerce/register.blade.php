@@ -10,7 +10,7 @@
     </div>
 </div>
 {{-- login --}}
-<section class="pt-150 pb-150">
+<section class="pt-50 pb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 m-auto">
@@ -25,57 +25,63 @@
 
                                 <form method="post" action="{{ route('e-commerce.register_user') }} " enctype="multipart/form-data">
                                     @if(Session::has('register_success'))
-                                    <div class="alert-success">
-                                        {{ Session::get('register_success')}}
+                                    <div class="alert-success m-1">
+                                        <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+                                            <strong>Success!</strong> {{ Session::get('register_success')}}
+                                            <button type="button" class="btn btn-success close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+
                                     </div>
                                     @endif
 
                                     @if(Session::has('register_error'))
-                                    <div class="alert-success">
+                                    <div class="alert-danger">
                                         {{ Session::get('register_error') }}
                                     </div>
                                     @endif
 
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" required name="name" placeholder="Name">
-                                        <span class="text-danger">
+                                        <input type="text" required  class="form-control @error('name') 'is-invalid' @enderror" name="name" placeholder="Name" value="{{ old('name') }}">
+                                        <div class="invalid-feedback">
                                             @error('name')
                                             {{ $message }}
                                             @enderror
-                                        </span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" required name="email" placeholder="Email">
-                                        <span class="text-danger">
+                                        <input type="text" required  class="form-control @error('email') is-invalid @enderror" name="email" class="is-invalid" placeholder="Email" value="{{ old('email') }}">
+                                        <div class="invalid-feedback">
                                             @error('email')
                                             {{ $message }}
                                             @enderror
-                                        </span>
+                                          </div>
                                     </div>
                                     <div class="form-group">
-                                        <input required type="password" name="password" placeholder="Password">
-                                        <span class="text-danger">
+                                        <input required type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+                                        <div class="invalid-feedback">
                                             @error('password')
                                             {{ $message }}
                                             @enderror
-                                        </span>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <input required type="password" name="password_verify" placeholder="Confirm password">
-                                        <span class="text-danger">
+                                        <input required type="password" class="form-control @error('password_verify') is-invalid @enderror" name="password_verify" placeholder="Confirm password">
+                                        <div class="invalid-feedback">
                                             @error('password_verify')
                                             {{ $message }}
                                             @enderror
-                                        </span>
+                                        </div>
                                     </div>
                                     <div class="login_footer form-group">
                                         <div class="chek-form">
                                             <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="check" id="check"   value="checked">
+                                                <input class="form-check-input form-control" type="checkbox"  name="check_field" id="check">
                                                 <label class="form-check-label" for="check"><span>I agree to terms &amp; Policy.</span></label>
                                                 <span class="text-danger">
-                                                    @error('check')
+                                                    @error('check_field')
                                                     {{ $message }}
                                                     @enderror
                                                 </span>
@@ -100,4 +106,5 @@
         </div>
     </div>
 </section>
+
 @endsection

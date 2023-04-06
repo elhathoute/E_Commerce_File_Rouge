@@ -8,16 +8,124 @@
     //     });
     //     $("#onloadModal").modal('show');
     // });
-    /*------navbar----------------*/
-    // const nav_links = $('#my-nav li.link a.a-link');
-    // console.log(nav_links)
-    // nav_links.on('click',function(){
-    //     // remove active from all links
-    //             nav_links.removeClass('active');
-    //     // add active to current link
-    //             $(this).addClass('active');
-    //             console.log($(this))
-    //         });
+    /*--------------FOrm of update information of user adress-phone-------*/
+    $('#form-change-info').submit(function(event) {
+
+        event.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(success) {
+                // show alert success
+                $('#sucess-error-update-info').html(`
+                <div class="alert-success m-1 text-center">
+                <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+                   <span>Success</span>
+                  </div>
+            </div>
+                `);
+                 // wait 2 seconds and refresh the page
+                 setTimeout(function(){
+                    location.reload();
+                },2000);
+            },
+
+            error: function(error) {
+                // vider les div d'erreurs AND add class valid
+                $('.inputs-valid').removeClass('is-invalid');
+                $('.inputs-valid').addClass('is-valid');
+                $('.inputs-error').html('');
+
+                for (var key in error.responseJSON.errors) {
+                    if (error.responseJSON.errors.hasOwnProperty(key)) {
+                        // console.log(['responseJSON']['errors'][`${key}`])
+                        var errorMessages = error.responseJSON.errors[key];
+                        // $(`#${key}`).html(errorMessages)
+                        for (var i = 0; i < errorMessages.length; i++) {
+                            $(`[name="${key}"]`).addClass('is-invalid');
+                            $(`#${key}-error`).html(errorMessages[i]);
+                            // console.log(key + ': ' + errorMessages[i]);
+                          }
+                    }
+
+                }
+
+                // show alert error
+                $('#sucess-error-update-info').html(`
+                <div class="alert-success m-1 text-center">
+                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+                   <span>Error</span>
+                  </div>
+            </div>
+                `);
+
+
+
+            }
+        });
+    });
+    /*--------------FOrm of update compte email+name+password-------*/
+    $('#form-compte-info').submit(function(event) {
+
+        event.preventDefault();
+
+        $.ajax({
+            type: $(this).attr('method'),
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            success: function(success) {
+                // show alert success
+                $('#sucess-error-update-info').html(`
+                <div class="alert-success m-1 text-center">
+                <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+                   <span>Success</span>
+                  </div>
+            </div>
+                `);
+                 // wait 2 seconds and refresh the page
+                 setTimeout(function(){
+                    location.reload();
+                },2000);
+            },
+
+            error: function(error) {
+                // vider les div d'erreurs AND add class valid
+                $('.inputs-valid-compte').removeClass('is-invalid');
+                $('.inputs-valid-compte').addClass('is-valid');
+                $('.inputs-error-compte').html('');
+
+                for (var key in error.responseJSON.errors) {
+                    if (error.responseJSON.errors.hasOwnProperty(key)) {
+                        // console.log(['responseJSON']['errors'][`${key}`])
+                        var errorMessages = error.responseJSON.errors[key];
+                        // $(`#${key}`).html(errorMessages)
+                        for (var i = 0; i < errorMessages.length; i++) {
+                            $(`[name="${key}"]`).addClass('is-invalid');
+                            $(`#${key}-error`).html(errorMessages[i]);
+                            // console.log(key + ': ' + errorMessages[i]);
+                          }
+                    }
+
+                }
+
+                // show alert error
+                $('#sucess-error-update-info').html(`
+                <div class="alert-success m-1 text-center">
+                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+                   <span>Error</span>
+                  </div>
+            </div>
+                `);
+
+
+
+            }
+        });
+    });
+
+
     /*-----------------
         Menu Stick
     -----------------*/

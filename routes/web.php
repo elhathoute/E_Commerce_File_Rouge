@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GithubSocialiteController;
+use App\Http\Controllers\LinkedinSocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +17,29 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', function () {
         return view('e-commerce.main');
-    })->name('e-commerce.home');
+    })->middleware('auth')->name('e-commerce.home');
+
+
+Route::controller(AuthController::class)->group(function(){
+    // register
+    Route::get('register','register')->name('e-commerce.register');
+    Route::post('registerUser','registerUser')->name('e-commerce.register_user');
+    // login
+    Route::get('login','login')->name('e-commerce.login');
+    Route::post('loginUser','loginUser')->name('e-commerce.login_user');
+    // logout
+    Route::post('logout','logout')->middleware('auth')->name('e-commerce.logout');
+    // profile
+    Route::get('user/profile','profile')->middleware('auth')->name('e-commerce.user.profile');
+    // change address of user
+    Route::patch('user/adress','change_adress_user')->middleware('auth')->name('e-commerce.change_adress_user');
+    // change compte
+    Route::patch('user/compte','change_compte_user')->middleware('auth')->name('e-commerce.change_compte_user');
+
+});
+
+
+
 Route::get('/about', function () {
     return view('e-commerce.about');
 })->name('e-commerce.about');
@@ -30,10 +54,8 @@ Route::get('/login', function () {
     return view('e-commerce.login');
 })->name('e-commerce.login');
 
-Route::controller(AuthController::class)->group(function(){
-    Route::get('register','register')->name('e-commerce.register');
-    Route::post('registerUser','registerUser')->name('e-commerce.register_user');
-});
+
+
 // Route::get('/register', function () {
 //     return view('e-commerce.register');
 // })->name('e-commerce.register');

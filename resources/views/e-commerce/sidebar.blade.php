@@ -107,6 +107,19 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('e-commerce.contact') }}">Contact</a></li>
+
+                        <li class="menu-item-has-children"><a href="#">My Account</a>
+                            <ul class="sub-menu  dropdown">
+                                <li><a href="{{ route('e-commerce.user.profile') }}">Dashboard</a></li>
+                                <li><a href="#">Products</a></li>
+                                <li><a href="#">Categories</a></li>
+                                <li><a href="#">Coupons</a></li>
+                                <li><a href="#">Orders</a></li>
+                                <li><a href="#">Customers</a></li>
+
+                            </ul>
+                        </li>
                         {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="blog.html">Blog</a></li> --}}
                         <!-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Language</a>
                             <ul class="dropdown">
@@ -121,15 +134,32 @@
                 <!-- mobile menu end -->
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
-                 <div class="single-mobile-header-info mt-30">
-                    <a href="{{ route('e-commerce.contact') }}"> Contact </a>
+
+            @guest
+                <div class="single-mobile-header-info">
+                    <i class="fi-rs-key"></i> <a href="{{ route('e-commerce.login') }}">Log In</a>
                 </div>
                 <div class="single-mobile-header-info">
-                    <i class="fi-rs-key"></i> <a href="{{ route('e-commerce.login') }}">Log In </a>
+                    <i class="fi-rs-user"></i> <a href="{{ route('e-commerce.register') }}">Sign Up</a>
                 </div>
+
+                @else
                 <div class="single-mobile-header-info">
-                    <i class="fi-rs-user"></i> <a href="{{ route('e-commerce.register') }}"> Sign Up</a></li>
+                    <i class="fi-rs-user"></i> <strong>Hi </strong><span class="text-decoration-underline">{{ auth()->user()->name }}</span>
+
                 </div>
+                <div class="single-mobile-header-info ">
+                <form method="post" action="{{ route('e-commerce.logout') }}">
+                    @csrf
+                    <button class="btn btn-logout" ><i class="fi-rs-sign-out"></i> Logout</a>
+
+
+                </form>
+
+
+                </div>
+            @endguest
+
                 <!-- <div class="single-mobile-header-info">
                     <a href="#">(+1) 0000-000-000 </a>
                 </div> -->

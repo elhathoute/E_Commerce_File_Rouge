@@ -11,6 +11,11 @@
 body{
     background-color:white !important;
 }
+.btn-logout{
+    padding: 4px !important;
+    background-color: #191818 !important;
+    border:1px solid black !important;
+}
 .contact-us{
     width: 100%;
     background-image: url(https://img6.shoes.fr/images/mobile/home/home_newCo_PE23.jpg);
@@ -7948,8 +7953,8 @@ span.fi-rs-apps {
   padding-top: 145px !important;
 }
 
-.pt-150 {
-  padding-top: 150px !important;
+.pt-50 {
+  padding-top: 50px !important;
 }
 
 .pt-155 {
@@ -8112,8 +8117,8 @@ span.fi-rs-apps {
   padding-bottom: 145px !important;
 }
 
-.pb-150 {
-  padding-bottom: 150px !important;
+.pb-50 {
+  padding-bottom: 50px !important;
 }
 
 .pb-155 {
@@ -9201,7 +9206,9 @@ span.fi-rs-apps {
 
 @media only screen and (max-width: 768px) {
     /*aziz*/
-
+.alert{
+    flex-direction: column;
+}
     .hero-slider-1 .single-slider-img-1  {
        display: none !important;
     }
@@ -9214,6 +9221,11 @@ span.fi-rs-apps {
         padding:15px 20px 20px 20px ;
     }
     /* fin aziz */
+    .btn-success{
+        color: #fff !important;
+        background-color: #198754 !important;
+        border-color: #198754 !important;
+    }
     .shoes-cart-adress{
        display: flex;
        align-items: center;

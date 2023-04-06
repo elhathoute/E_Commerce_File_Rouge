@@ -1,5 +1,10 @@
 <header class="header-area header-style-1 header-height-2">
-
+    @auth
+    login
+    @endauth
+    @guest
+    not login
+    @endguest
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="header-wrap">
@@ -17,13 +22,13 @@
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.php">
-                                    <img class="svgInject" alt="Surfside Media" src="assets/imgs/theme/icons/icon-heart.svg">
+                                    <img class="svgInject" alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
                                     <span class="pro-count blue">4</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="cart.html">
-                                    <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-cart.svg">
+                                    <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                     <span class="pro-count blue">2</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -195,7 +200,7 @@
                                         </li> -->
                                     </ul>
                                 </li>
-                                {{-- <li><a href="blog.html">Blog </a></li> --}}
+                              @guest
                                 <li class="link"><a  class="a-link"href="{{ route('e-commerce.contact') }}">Contact</a></li>
                                 <li class="link">
                                     <i class="fi-rs-key"></i> <a class="a-link" href="{{ route('e-commerce.login') }}"> Log In </a>
@@ -203,7 +208,30 @@
 
                                 </li>
                                 <li class="link">
-                                    <i class="fi-rs-user"></i> <a class="a-link" href="{{ route('e-commerce.register') }}"> Sign Up</a></li>
+                                    <i class="fi-rs-user"></i> <a class="a-link" href="{{ route('e-commerce.register') }}"> Sign Up</a>
+                                </li>
+                                {{-- my account --}}
+                                @else
+                                <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{ route('e-commerce.user.profile') }}">Dashboard</a></li>
+                                        <li><a href="#">Products</a></li>
+                                        <li><a href="#">Categories</a></li>
+                                        <li><a href="#">Coupons</a></li>
+                                        <li><a href="#">Orders</a></li>
+                                        <li><a href="#">Customers</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <form method="post" action="{{ route('e-commerce.logout') }}">
+                                        @csrf
+                                        <button class="btn btn-logout" type="submit"><i class="fi-rs-sign-out"></i> Logout</button>
+                                    </form>
+                                 </li>
+
+
+                                @endguest
                                 </li>
                             </ul>
                         </nav>
@@ -217,13 +245,13 @@
                     <div class="header-action-2">
                         <div class="header-action-icon-2">
                             <a href="shop-wishlist.php">
-                                <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-heart.svg">
+                                <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
                                 <span class="pro-count white">4</span>
                             </a>
                         </div>
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" href="cart.html">
-                                <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-cart.svg">
+                                <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
                                 <span class="pro-count white">2</span>
                             </a>
                             <div class="cart-dropdown-wrap cart-dropdown-hm2">
