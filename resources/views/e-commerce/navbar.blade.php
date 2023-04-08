@@ -1,10 +1,16 @@
+@php
+           $categories=App\Models\Category::with('subCategories')->get();
+
+@endphp
+
 <header class="header-area header-style-1 header-height-2">
     @auth
-    login
+    login with compte =>{{ auth()->user()->role }}
     @endauth
     @guest
     not login
     @endguest
+
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="header-wrap">
@@ -91,113 +97,25 @@
                                 <li class="link"><a  class="a-link"href="{{ route('e-commerce.shop') }}">Shop</a></li>
                                 <li class="position-static link"><a class="a-link" href="#">Our Categories <i class="fi-rs-angle-down"></i></a>
                                     <ul class="mega-menu">
+                                        @foreach ($categories as $category )
+
                                         <li class="sub-mega-menu sub-mega-menu-width-33">
-                                            <a class="menu-title" href="#">Women's </a>
+                                            <a class="menu-title" href="#">{{ $category->name }} </a>
                                             <ul>
-                                                <!-- <li><a href="product-details.html">Dresses</a></li>
-                                                <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                                <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                                <li><a href="product-details.html">Wedding Dresses</a></li>
-                                                <li><a href="product-details.html">Prom Dresses</a></li>
-                                                <li><a href="product-details.html">Cosplay Costumes</a></li> -->
+                                                @foreach ($category->subCategories as $subcategory)
+
                                                 <li>
                                                     <a class="href-collection" href="#">
                                                         <img class="image-collection"
                                                             src="https://i.pinimg.com/236x/09/78/bd/0978bd221f145046b21fa404766e5587--sneakers-fashion-fashion-shoes.jpg"
                                                             alt="">
-                                                        Baskets</a>
+                                                            {{ $subcategory->name }}
+                                                        </a>
                                                 </li>
-                                                <li><a class="href-collection" href="#">
-                                                        <img class="image-collection" src="https://th.bing.com/th/id/OIP.EtBxB-yQhMpsxLgM_IU4UgHaD4?pid=ImgDet&rs=1"
-                                                            alt="">
-                                                        Bottines</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                        <img class="image-collection" src="https://i.pinimg.com/736x/cb/ac/41/cbac41f71608f2789e52a8ab7a149af2.jpg"
-                                                            alt="">
-                                                        Sandales</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                        <img class="image-collection"
-                                                            src="https://th.bing.com/th/id/R.34d364280dc3981976ddffedfdc3a0df?rik=7eac6%2ffExDVsQQ&pid=ImgRaw&r=0"
-                                                            alt="">
-                                                        Escarpins</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                        <img class="image-collection"
-                                                            src="https://i.etsystatic.com/7857639/r/il/2c1d7c/569721454/il_570xN.569721454_tj6i.jpg" alt="">
-                                                        Ballerines</a></li>
+                                                @endforeach
                                             </ul>
                                         </li>
-                                        <li class="sub-mega-menu sub-mega-menu-width-33">
-                                            <a class="menu-title" href="#">Men's </a>
-                                            <ul>
-                                                <!-- <li><a href="product-details.html">Jackets</a></li>
-                                                <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                                <li><a href="product-details.html">Genuine Leather</a></li>
-                                                <li><a href="product-details.html">Casual Pants</a></li>
-                                                <li><a href="product-details.html">Sweatpants</a></li>
-                                                <li><a href="product-details.html">Harem Pants</a></li> -->
-                                                <li>
-                                                    <a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://i.pinimg.com/236x/09/78/bd/0978bd221f145046b21fa404766e5587--sneakers-fashion-fashion-shoes.jpg" alt=""> Baskets</a>
-                                                </li>
-                                                <li><a class="href-collection" href="#">
-                                                    <img class="image-collection" src="https://th.bing.com/th/id/OIP.EtBxB-yQhMpsxLgM_IU4UgHaD4?pid=ImgDet&rs=1" alt="">
-                                                    Bottines</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://th.bing.com/th/id/R.e8ab7a03b0e7c1d1dd8bf8ce4c51cb35?rik=iqXtXzEk%2fhNZpg&riu=http%3a%2f%2ffreevector.co%2fwp-content%2fuploads%2f2011%2f11%2f88794-leather-derby-shoe.png&ehk=qne8PvjyKlAYHcyfI5pHp1jFBwJTJam9tplrMRTqpE0%3d&risl=&pid=ImgRaw&r=0" alt=""> Derbies</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://th.bing.com/th/id/R.edaa03ba97c24836ffab72fadbf54af3?rik=Q%2bqO66ESo0KAtg&pid=ImgRaw&r=0" alt=""> sport</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://th.bing.com/th/id/R.6c56b70b68b8777996ce0cf1ed7b037f?rik=3KeDmYGPs0mxuw&riu=http%3a%2f%2f4.bp.blogspot.com%2f-fZCTkk-fLhQ%2fVAs8OWNlN0I%2fAAAAAAAAiIY%2fLGLjAO846N8%2fs1600%2fScreen%2bShot%2b2014-09-06%2bat%2b9.53.14%2bAM.png&ehk=jR55zS2BY%2bVXMQXILuUNnl3xkwX9IAElGNyPsoZVSio%3d&risl=&pid=ImgRaw&r=0" alt=""> Mocassins</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="sub-mega-menu sub-mega-menu-width-33">
-                                            <a class="menu-title" href="#">Children's</a>
-                                            <ul>
-                                                <!-- <li><a href="product-details.html">Gaming Laptops</a></li>
-                                                <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                                <li><a href="product-details.html">Tablets</a></li>
-                                                <li><a href="product-details.html">Laptop Accessories</a></li>
-                                                <li><a href="product-details.html">Tablet Accessories</a></li> -->
-                                                <li>
-                                                    <a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://i.pinimg.com/236x/09/78/bd/0978bd221f145046b21fa404766e5587--sneakers-fashion-fashion-shoes.jpg" alt=""> Baskets</a>
-                                                </li>
-                                                <li><a class="href-collection" href="#">
-                                                    <img class="image-collection" src="https://i.pinimg.com/736x/cb/ac/41/cbac41f71608f2789e52a8ab7a149af2.jpg" alt="">
-                                                    Sandales</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                    <img class="image-collection" src="https://th.bing.com/th/id/OIP.EtBxB-yQhMpsxLgM_IU4UgHaD4?pid=ImgDet&rs=1" alt="">
-                                                    Bottines</a></li>
-                                                    <li><a class="href-collection" href="#">
-                                                        <img class="image-collection" src="https://i.etsystatic.com/7857639/r/il/2c1d7c/569721454/il_570xN.569721454_tj6i.jpg" alt="">
-                                                        Ballerines</a></li>
-                                                <li><a class="href-collection" href="#">
-                                                   <img class="image-collection" src="https://thumbs.dreamstime.com/b/sleeping-slippers-couple-hand-drawn-sketch-home-shoes-pair-black-white-doodle-vector-isolated-illustration-sleeping-slippers-213350844.jpg" alt=""> Pantoufles</a></li>
-
-                                            </ul>
-                                        </li>
-                                        <!-- <li class="sub-mega-menu sub-mega-menu-width-34">
-                                            <div class="menu-banner-wrap">
-                                                <a href="product-details.html"><img src="assets/imgs/banner/menu-banner.jpg" alt="Surfside Media"></a>
-                                                <div class="menu-banner-content">
-                                                    <h4>Hot deals</h4>
-                                                    <h3>Don't miss<br> Trending</h3>
-                                                    <div class="menu-banner-price">
-                                                        <span class="new-price text-success">Save to 50%</span>
-                                                    </div>
-                                                    <div class="menu-banner-btn">
-                                                        <a href="product-details.html">Shop now</a>
-                                                    </div>
-                                                </div>
-                                                <div class="menu-banner-discount">
-                                                    <h3>
-                                                        <span>35%</span>
-                                                        off
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </li> -->
+                                        @endforeach
                                     </ul>
                                 </li>
                               @guest
@@ -215,20 +133,21 @@
                                 <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="{{ route('e-commerce.user.profile') }}">Dashboard</a></li>
+                                        @if(auth()->user()->role=="admin")
                                         <li><a href="#">Products</a></li>
-                                        <li><a href="#">Categories</a></li>
-                                        <li><a href="#">Coupons</a></li>
-                                        <li><a href="#">Orders</a></li>
-                                        <li><a href="#">Customers</a></li>
+                                        <li><a href="{{ route('e-commerce.category') }}">Categories</a></li>
+                                        <li><a href="#">SubCategories</a></li>
+                                        <li><a href="#">Sizes</a></li>
+                                       @endif
+                                       <li>
+                                        <form method="post" action="{{ route('e-commerce.logout') }}">
+                                            @csrf
+                                            <a type="submit" class="btn btn-logout" ><i class="fi-rs-sign-out"></i> Logout</a>
+                                        </form>
+                                       </li>
 
                                     </ul>
                                 </li>
-                                <li>
-                                    <form method="post" action="{{ route('e-commerce.logout') }}">
-                                        @csrf
-                                        <button class="btn btn-logout" type="submit"><i class="fi-rs-sign-out"></i> Logout</button>
-                                    </form>
-                                 </li>
 
 
                                 @endguest
@@ -237,10 +156,7 @@
                         </nav>
                     </div>
                 </div>
-                <!-- <div class="hotline d-none d-lg-block">
-                    <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
-                </div> -->
-                <!-- <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p> -->
+
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
                         <div class="header-action-icon-2">

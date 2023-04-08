@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,8 +16,53 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // truncate() method to clear out any existing data
+        // DB::table('categories')->truncate();
+        // DB::table('sub_categories')->truncate();
+        // DB::table('category_sub_category')->truncate();
+
+            // seed category
+            $categories=[
+            ['name'=>'Man'],
+            ['name'=>'Women'],
+            ['name'=>'Children']
+            ];
+        // seed subcategory
+        $subCategories = [
+            ['name' => 'Baskets', 'image' => ''],
+            ['name' => 'Bottines', 'image' => ''],
+            ['name' => 'Sandales', 'image' => ''],
+            ['name' => 'Escarpins', 'image' => ''],
+            ['name' => 'Ballerines', 'image' => '']
+        ];
+
+            for($i=0;$i<=2;$i++){
+                $category=Category::create($categories[$i]);
+
+            }
+
+        foreach ($subCategories as $subCat) {
+               //seed category
+
+            $subCategory=SubCategory::create($subCat);
+
+            // associate the subCategory with category
+        $category->subCategories()->attach($subCategory->id);
+        }
+
+
+        // seed user
+        User::create([
+            'name'=>'azize',
+            'email'=>'azize@gmail.com',
+            'password'=>bcrypt('Azize@1998'),
+            'password_verify'=>bcrypt('Azize@1998'),
+            'role'=>'admin'
+        ]);
+
+
     }
 }

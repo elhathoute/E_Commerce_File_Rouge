@@ -8,6 +8,40 @@
     //     });
     //     $("#onloadModal").modal('show');
     // });
+    /*------------update category----------*/
+
+    $('.edit-category').click(function(){
+
+
+        const input_id_category = $('#id-category-input');
+        const input_name_category = $('#name-category-input');
+        const select_sub_category = $('.select2-selection__rendered');
+
+        select_sub_category.empty();
+        const id_category = $(this).closest('tr').find('#id-category-table').text();
+        // console.log(id_category);
+        input_id_category.val(id_category);
+        // get url
+        var current_url = $('#form-add-category').attr('action');
+        $('#form-add-category').attr('action', `${current_url}/${id_category}`);
+       
+
+        const name_category = $(this).closest('tr').find('#name-category-table').text();
+        // console.log(name_category);
+        input_name_category.val(name_category);
+        const sub_category = $(this).closest('tr').find('#sub-category-table li');
+
+        sub_category.each(function(){
+            select_sub_category.append($('<li>', {
+                text: $(this).text(),
+                value: $(this).attr('sub-cat-id-table')
+            }));
+        });
+/*--------------------------------------------------------------*/
+
+
+
+    })
     /*--------------FOrm of update information of user adress-phone-------*/
     $('#form-change-info').submit(function(event) {
 
@@ -567,6 +601,10 @@
             enabled: true
         }
     });
+    /*-----------------
+    select multi sub category
+    ------------------------*/
+    $('.select-sub-category').select2();
 
     /*---------------------
         Select active

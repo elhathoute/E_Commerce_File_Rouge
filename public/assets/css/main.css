@@ -11,9 +11,13 @@
 body{
     background-color:white !important;
 }
+.trash,.edit{
+    padding: 2px 4px !important;
+}
 .btn-logout{
     padding: 4px !important;
     background-color: #191818 !important;
+    color: white !important;
     border:1px solid black !important;
 }
 .contact-us{
@@ -1207,9 +1211,9 @@ textarea:focus {
   color: unset;
 }
 
-.select2-container {
+/* .select2-container {
   max-width: 135px;
-}
+} */
 
 /*contact form*/
 .contact-from-area .contact-form-style button {

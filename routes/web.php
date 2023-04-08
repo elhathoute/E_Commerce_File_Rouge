@@ -2,8 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GithubSocialiteController;
+use App\Http\Controllers\Home;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinkedinSocialiteController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +19,10 @@ use App\Http\Controllers\LinkedinSocialiteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-        return view('e-commerce.main');
-    })->middleware('auth')->name('e-commerce.home');
+// index
+Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');
+// shop
+Route::get('/shop',[ShopController::class,'shop'])->name('e-commerce.shop');
 
 
 Route::controller(AuthController::class)->group(function(){
@@ -35,6 +40,12 @@ Route::controller(AuthController::class)->group(function(){
     Route::patch('user/adress','change_adress_user')->middleware('auth')->name('e-commerce.change_adress_user');
     // change compte
     Route::patch('user/compte','change_compte_user')->middleware('auth')->name('e-commerce.change_compte_user');
+    // category
+    Route::get('category',[CategoryController::class,'index'])->middleware('auth')->name('e-commerce.category');
+    //add category
+    Route::post('add/category/{id?}',[CategoryController::class,'store'])->middleware('auth')->name('e-commerce.add_category');
+    // delete category
+    Route::delete('delete/category/{id}',[CategoryController::class,'delete'])->middleware('auth')->name('e-commerce.delete_category');
 
 });
 
@@ -43,9 +54,7 @@ Route::controller(AuthController::class)->group(function(){
 Route::get('/about', function () {
     return view('e-commerce.about');
 })->name('e-commerce.about');
-Route::get('/shop', function () {
-    return view('e-commerce.shop');
-})->name('e-commerce.shop');
+
 Route::get('/contact', function () {
     return view('e-commerce.contact');
 })->name('e-commerce.contact');

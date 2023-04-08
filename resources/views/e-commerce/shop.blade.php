@@ -543,18 +543,14 @@
                 </div>
                 <div class="widget-category mb-30">
                     <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                    @foreach ($categories as $category )
+
                     <ul class="categories">
-                        <li><a href="#">Baskets</a></li>
-                        <li><a href="#">Bottines</a></li>
-                        <li><a href="#">Sandales</a></li>
-                        <li><a href="#">Escarpins</a></li>
-                        <li><a href="#">Ballerines</a></li>
-                        <li><a href="#">Derbies</a></li>
-                        <li><a href="#">Sport</a></li>
-                        <li><a href="#">Mocassins</a></li>
-                        <li><a href="#">Bottines</a></li>
-                        <li><a href="#">Pantoufles</a></li>
+                        <li><a href="#">{{ $category->name }}</a></li>
+
                     </ul>
+                    @endforeach
+
                 </div>
                 <!-- Fillter By Price -->
                 <div class="sidebar-widget price_range range mb-30">
@@ -585,7 +581,7 @@
                                 <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="">
                                 <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
                             </div>
-                    
+
                         </div>
                     </div>
                     <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
