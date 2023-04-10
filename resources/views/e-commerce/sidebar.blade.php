@@ -44,8 +44,7 @@
                                         <li>
                                             <a class="href-collection" href="#">
                                                 <img class="image-collection"
-                                                    src="https://i.pinimg.com/236x/09/78/bd/0978bd221f145046b21fa404766e5587--sneakers-fashion-fashion-shoes.jpg"
-                                                    alt="">
+                                                src="{{ asset('assets/imageSubCategory/'.$subcategory->image) }}" alt="" srcset="">
                                                     {{ $subcategory->name }}</a>
                                         </li>
                                         @endforeach
@@ -64,7 +63,7 @@
                                 @if (auth()->user()->role=='admin')
                                 <li><a href="#">Products</a></li>
                                 <li><a href="{{ route('e-commerce.category') }}">Categories</a></li>
-                                <li><a href="#">SubCategories</a></li>
+                                <li><a href="{{ route('e-commerce.subcategory') }}">SubCategories</a></li>
                                 <li><a href="#">Sizes</a></li>
                                @endif
 

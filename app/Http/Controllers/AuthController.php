@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Rules\ValidCity;
-use App\Rules\ValidPassword;
 use App\Rules\ValidPostal;
+use App\Rules\ValidPassword;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -14,32 +15,42 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     // change_compte_user
-    public function change_compte_user(Request $request){
-        // dd($request);
+    public function change_compte_user(Request $request,$id){
+        // dd($request->all(), $id);
+
+        $user = User::findOrFail($id);
         $validatedData= $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id)
+            ],
             'password_old' => ['required',new ValidPassword],
             'password_new' => ['required','min:8','different:password_old'],
             'password_confirm' => ['required','min:8','same:password_new'],
         ]);
-        $user = User::where('id', $request->id)->firstOrFail();
+
+        // $user = User::where('id', $request->id)->firstOrFail();
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = bcrypt($validatedData['password_new']);
 
-        $updateComteUser=$user->save();
-        if(!$updateComteUser){
+        $updateCompteUser=$user->update();
+        if(!$updateCompteUser){
+
             return back()->withInput();
         }
         else{
+
            return  redirect('/');
         }
 
 
     }
     // change adress of user
-    public function change_adress_user(Request $request){
+    public function change_adress_user(Request $request,$id){
+        // dd($user);
        $validatedData= $request->validate([
             'country' => 'required|string',
             'city' => ['required',new ValidCity],
@@ -49,7 +60,8 @@ class AuthController extends Controller
         ]);
 
     //
-        $user = User::where('id', $request->id)->firstOrFail();
+        // $user = User::where('id', $request->id)->firstOrFail();
+        $user = User::findOrFail($id);
 
         $user->country = $validatedData['country'];
         $user->city = $validatedData['city'];
@@ -57,7 +69,7 @@ class AuthController extends Controller
         $user->phone = $validatedData['phone'];
         $user->address = $validatedData['address'];
 
-        $updateUser=$user->save();
+        $updateUser=$user->update();
 
         if(!$updateUser){
             return back()->withInput();

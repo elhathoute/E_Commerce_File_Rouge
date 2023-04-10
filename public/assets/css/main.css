@@ -9,8 +9,13 @@
 @import url(plugins/perfect-scrollbar.css);
 /*ABdelaziz*/
 body{
-    background-color:white !important;
+    background-color:#FFF2CC;
 }
+@media screen and (max-width: 765px) {
+    .flex-column-reverse-765 {
+      flex-direction: column-reverse !important;
+    }
+  }
 .trash,.edit{
     padding: 2px 4px !important;
 }

@@ -4,12 +4,6 @@
 @endphp
 
 <header class="header-area header-style-1 header-height-2">
-    @auth
-    login with compte =>{{ auth()->user()->role }}
-    @endauth
-    @guest
-    not login
-    @endguest
 
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
@@ -92,7 +86,7 @@
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                         <nav id="my-nav">
                             <ul>
-                                <li class="link"><a class="a-link active" href="{{ route('e-commerce.home') }}">Home </a></li>
+                                <li class="link"><a class="a-link " href="{{ route('e-commerce.home') }}">Home </a></li>
                                 <li class="link"><a  class="a-link" href="{{ route('e-commerce.about')}}">About</a></li>
                                 <li class="link"><a  class="a-link"href="{{ route('e-commerce.shop') }}">Shop</a></li>
                                 <li class="position-static link"><a class="a-link" href="#">Our Categories <i class="fi-rs-angle-down"></i></a>
@@ -107,8 +101,8 @@
                                                 <li>
                                                     <a class="href-collection" href="#">
                                                         <img class="image-collection"
-                                                            src="https://i.pinimg.com/236x/09/78/bd/0978bd221f145046b21fa404766e5587--sneakers-fashion-fashion-shoes.jpg"
-                                                            alt="">
+                                                       src="{{ asset('assets/imageSubCategory/'.$subcategory->image) }}" alt="" srcset="">
+
                                                             {{ $subcategory->name }}
                                                         </a>
                                                 </li>
@@ -136,7 +130,7 @@
                                         @if(auth()->user()->role=="admin")
                                         <li><a href="#">Products</a></li>
                                         <li><a href="{{ route('e-commerce.category') }}">Categories</a></li>
-                                        <li><a href="#">SubCategories</a></li>
+                                        <li><a href="{{ route('e-commerce.subcategory') }}">SubCategories</a></li>
                                         <li><a href="#">Sizes</a></li>
                                        @endif
                                        <li>

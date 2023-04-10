@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -13,10 +14,10 @@ class CategoryController extends Controller
         return view('e-commerce.category');
     }
 
-    public function store(Request $request,$id=null) {
+    public function store(Request $request) {
 
         // save
-       if($id==null){
+
 
         $validatedData = $request->validate([
             'name' => 'required|string|min:3|max:20|unique:categories,name',
@@ -36,41 +37,8 @@ class CategoryController extends Controller
         return back()->with('add-category-error','Category not  add ')->withInput();
 
         }
-       }
-    //    update
-       else{
-        // dd($request);
-        $validatedData = $request->validate([
-            'name' => 'required|string|min:3|max:20',
-            'sub_category_ids' => 'required|array',
-        ]);
-
-        $category = Category::find($id);
-
-        if (!$category) {
-            // dd('stop');
-           return  view('e-commerce.404');
-        }
 
 
-        $existing_sub_category_ids = $category->subCategories()->pluck('sub_categories.id')->toArray();
-    // delete existing subcategories from the category
-    $category->subCategories()->detach($existing_sub_category_ids);
-    //save category
-        $category->name = $validatedData['name'];
-        $category->save();
-    // add  subcategories to the category
-
-        $category->subCategories()->attach($validatedData['sub_category_ids']);
-
-        if($category){
-            return back()->with('add-category-success','Category update with success')->withInput();
-
-        }else{
-        return back()->with('add-category-error','Category not  updated ')->withInput();
-
-        }
-       }
     }
     // delete
     public function delete($id){
@@ -84,5 +52,50 @@ class CategoryController extends Controller
        }else{
         return back()->with('delete-category-error','category not delete');
        }
+    }
+    // edit
+    public function edit($id){
+        // dd($id);
+        $category=Category::find($id);
+        // dd($category);
+
+        $subCategories=$category->subCategories()->get();
+        // dd($subCategories);
+        return view('e-commerce.edit_category',['subCategories'=>$subCategories,'category'=>$category]);
+    }
+    // update
+    public function update (Request $request,$id){
+        // dd($request);
+        $category=Category::findOrFail($id);
+        $validatedData = $request->validate([
+            'name' => [
+            'required',
+            'string',
+            'min:3',
+            'max:20',
+            Rule::unique('categories')->ignore($category->id)],
+            'sub_category_ids' => 'required|array',
+        ]);
+
+        // get category
+        // $category = Category::find($request['id']);
+
+        $existing_sub_category_ids = $category->subCategories()->pluck('sub_categories.id')->toArray();
+        $category->subCategories()->detach($existing_sub_category_ids);
+
+        $category->name=$validatedData['name'];
+        $category->update();
+        // dd($category);
+
+        $category->subCategories()->attach($validatedData['sub_category_ids']);
+        if($category){
+            return redirect('/category')->with('add-category-success','Category update with success');
+
+        }else{
+        return back()->with('add-category-error','Category not  update ')->withInput();
+
+        }
+
+
     }
 }

@@ -10,154 +10,155 @@
     // });
     /*------------update category----------*/
 
-    $('.edit-category').click(function(){
+//     $('.edit-category').click(function(){
 
 
-        const input_id_category = $('#id-category-input');
-        const input_name_category = $('#name-category-input');
-        const select_sub_category = $('.select2-selection__rendered');
+//         const input_id_category = $('#id-category-input');
+//         const input_name_category = $('#name-category-input');
+//         const select_sub_category = $('.select2-selection__rendered');
 
-        select_sub_category.empty();
-        const id_category = $(this).closest('tr').find('#id-category-table').text();
-        // console.log(id_category);
-        input_id_category.val(id_category);
-        // get url
-        var current_url = $('#form-add-category').attr('action');
-        $('#form-add-category').attr('action', `${current_url}/${id_category}`);
-       
-
-        const name_category = $(this).closest('tr').find('#name-category-table').text();
-        // console.log(name_category);
-        input_name_category.val(name_category);
-        const sub_category = $(this).closest('tr').find('#sub-category-table li');
-
-        sub_category.each(function(){
-            select_sub_category.append($('<li>', {
-                text: $(this).text(),
-                value: $(this).attr('sub-cat-id-table')
-            }));
-        });
-/*--------------------------------------------------------------*/
+//         select_sub_category.empty();
+//         const id_category = $(this).closest('tr').find('#id-category-table').text();
+//         // console.log(id_category);
+//         input_id_category.val(id_category);
+//         // get url
+//         var current_url = $('#form-add-category').attr('action');
+//         $('#form-add-category').attr('action', `${current_url}/${id_category}`);
 
 
+//         const name_category = $(this).closest('tr').find('#name-category-table').text();
+//         // console.log(name_category);
+//         input_name_category.val(name_category);
+//         const sub_category = $(this).closest('tr').find('#sub-category-table li');
 
-    })
+//         sub_category.each(function(){
+//             select_sub_category.append($('<li>', {
+//                 text: $(this).text(),
+//                 value: $(this).attr('sub-cat-id-table')
+//             }));
+//         });
+// /*--------------------------------------------------------------*/
+
+
+
+//     })
     /*--------------FOrm of update information of user adress-phone-------*/
-    $('#form-change-info').submit(function(event) {
+    // $('#form-change-info').submit(function(event) {
 
-        event.preventDefault();
+    //     event.preventDefault();
 
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(success) {
-                // show alert success
-                $('#sucess-error-update-info').html(`
-                <div class="alert-success m-1 text-center">
-                <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
-                   <span>Success</span>
-                  </div>
-            </div>
-                `);
-                 // wait 2 seconds and refresh the page
-                 setTimeout(function(){
-                    location.reload();
-                },2000);
-            },
+    //     $.ajax({
+    //         type: $(this).attr('method'),
+    //         url: $(this).attr('action'),
+    //         data: $(this).serialize(),
+    //         success: function(success) {
+    //             // show alert success
+    //             $('#sucess-error-update-info').html(`
+    //             <div class="alert-success m-1 text-center">
+    //             <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+    //                <span>Success</span>
+    //               </div>
+    //         </div>
+    //             `);
+    //              // wait 2 seconds and refresh the page
+    //              setTimeout(function(){
+    //                 location.reload();
+    //             },2000);
+    //         },
 
-            error: function(error) {
-                // vider les div d'erreurs AND add class valid
-                $('.inputs-valid').removeClass('is-invalid');
-                $('.inputs-valid').addClass('is-valid');
-                $('.inputs-error').html('');
+    //         error: function(error) {
+    //             // vider les div d'erreurs AND add class valid
+    //             $('.inputs-valid').removeClass('is-invalid');
+    //             $('.inputs-valid').addClass('is-valid');
+    //             $('.inputs-error').html('');
 
-                for (var key in error.responseJSON.errors) {
-                    if (error.responseJSON.errors.hasOwnProperty(key)) {
-                        // console.log(['responseJSON']['errors'][`${key}`])
-                        var errorMessages = error.responseJSON.errors[key];
-                        // $(`#${key}`).html(errorMessages)
-                        for (var i = 0; i < errorMessages.length; i++) {
-                            $(`[name="${key}"]`).addClass('is-invalid');
-                            $(`#${key}-error`).html(errorMessages[i]);
-                            // console.log(key + ': ' + errorMessages[i]);
-                          }
-                    }
+    //             for (var key in error.responseJSON.errors) {
+    //                 if (error.responseJSON.errors.hasOwnProperty(key)) {
+    //                     // console.log(['responseJSON']['errors'][`${key}`])
+    //                     var errorMessages = error.responseJSON.errors[key];
+    //                     // $(`#${key}`).html(errorMessages)
+    //                     for (var i = 0; i < errorMessages.length; i++) {
+    //                         $(`[name="${key}"]`).addClass('is-invalid');
+    //                         $(`#${key}-error`).html(errorMessages[i]);
+    //                         // console.log(key + ': ' + errorMessages[i]);
+    //                       }
+    //                 }
 
-                }
+    //             }
 
-                // show alert error
-                $('#sucess-error-update-info').html(`
-                <div class="alert-success m-1 text-center">
-                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
-                   <span>Error</span>
-                  </div>
-            </div>
-                `);
+    //             // show alert error
+    //             $('#sucess-error-update-info').html(`
+    //             <div class="alert-success m-1 text-center">
+    //             <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+    //                <span>Error</span>
+    //               </div>
+    //         </div>
+    //             `);
 
 
 
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
     /*--------------FOrm of update compte email+name+password-------*/
-    $('#form-compte-info').submit(function(event) {
+    // $('#form-compte-info').submit(function(event) {
 
-        event.preventDefault();
+    //     event.preventDefault();
 
-        $.ajax({
-            type: $(this).attr('method'),
-            url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(success) {
-                // show alert success
-                $('#sucess-error-update-info').html(`
-                <div class="alert-success m-1 text-center">
-                <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
-                   <span>Success</span>
-                  </div>
-            </div>
-                `);
-                 // wait 2 seconds and refresh the page
-                 setTimeout(function(){
-                    location.reload();
-                },2000);
-            },
+    //     $.ajax({
+    //         type: $(this).attr('method'),
+    //         url: $(this).attr('action'),
+    //         data: $(this).serialize(),
+    //         success: function(success) {
+    //             console.log(success)
+    //             // show alert success
+    //             $('#sucess-error-update-info').html(`
+    //             <div class="alert-success m-1 text-center">
+    //             <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+    //                <span>Success</span>
+    //               </div>
+    //         </div>
+    //             `);
+    //              // wait 2 seconds and refresh the page
+    //              setTimeout(function(){
+    //                 location.reload();
+    //             },2000);
+    //         },
 
-            error: function(error) {
-                // vider les div d'erreurs AND add class valid
-                $('.inputs-valid-compte').removeClass('is-invalid');
-                $('.inputs-valid-compte').addClass('is-valid');
-                $('.inputs-error-compte').html('');
+    //         error: function(error) {
+    //             // vider les div d'erreurs AND add class valid
+    //             $('.inputs-valid-compte').removeClass('is-invalid');
+    //             $('.inputs-valid-compte').addClass('is-valid');
+    //             $('.inputs-error-compte').html('');
 
-                for (var key in error.responseJSON.errors) {
-                    if (error.responseJSON.errors.hasOwnProperty(key)) {
-                        // console.log(['responseJSON']['errors'][`${key}`])
-                        var errorMessages = error.responseJSON.errors[key];
-                        // $(`#${key}`).html(errorMessages)
-                        for (var i = 0; i < errorMessages.length; i++) {
-                            $(`[name="${key}"]`).addClass('is-invalid');
-                            $(`#${key}-error`).html(errorMessages[i]);
-                            // console.log(key + ': ' + errorMessages[i]);
-                          }
-                    }
+    //             for (var key in error.responseJSON.errors) {
+    //                 if (error.responseJSON.errors.hasOwnProperty(key)) {
+    //                     // console.log(['responseJSON']['errors'][`${key}`])
+    //                     var errorMessages = error.responseJSON.errors[key];
+    //                     // $(`#${key}`).html(errorMessages)
+    //                     for (var i = 0; i < errorMessages.length; i++) {
+    //                         $(`[name="${key}"]`).addClass('is-invalid');
+    //                         $(`#${key}-error`).html(errorMessages[i]);
+    //                         // console.log(key + ': ' + errorMessages[i]);
+    //                       }
+    //                 }
 
-                }
+    //             }
 
-                // show alert error
-                $('#sucess-error-update-info').html(`
-                <div class="alert-success m-1 text-center">
-                <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
-                   <span>Error</span>
-                  </div>
-            </div>
-                `);
+    //             // show alert error
+    //             $('#sucess-error-update-info').html(`
+    //             <div class="alert-success m-1 text-center">
+    //             <div class="alert alert-danger alert-dismissible fade show d-flex justify-content-between flex-wrap align-items-center" role="alert">
+    //                <span>Error</span>
+    //               </div>
+    //         </div>
+    //             `);
 
 
 
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
 
 
     /*-----------------

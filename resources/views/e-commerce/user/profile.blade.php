@@ -118,13 +118,13 @@
                                                     <h5 class="mb-0"> Address</h5>
                                                 </div>
                                                 <div class="card-body">
-                                                  <form id="form-change-info" action="{{ route('e-commerce.change_adress_user') }}" method="post" enctype="multipart/form-data">
+                                                  <form id="form-change-info" action="{{ route('e-commerce.change_adress_user',['id'=>auth()->user()->id]) }}" method="post" enctype="multipart/form-data">
 
                                                     @csrf
                                                     @method('PATCH')
                                                     <div class="row">
                                                         <div hidden class="form-group col-md-12">
-                                                            <input type="number" hidden class="form-control" id="id" name="id" value="{{ auth()->user()->id }}">
+                                                            {{-- <input type="number" hidden class="form-control" id="id" name="id" value="{{ auth()->user()->id }}"> --}}
                                                           </div>
                                                         <div class="form-group col-md-6">
                                                             <label for="country">Country : </label>
@@ -186,46 +186,71 @@
                                         </div>
                                         <div class="card-body">
 
-                                            <form id="form-compte-info" action="{{ route('e-commerce.change_compte_user') }}" method="post" enctype="multipart/form-data">
+                                            <form id="form-compte-info" action="{{ route('e-commerce.change_compte_user',['id'=>auth()->user()->id]) }}" method="post" enctype="multipart/form-data">
 
                                                 @csrf
                                                 @method('PATCH')
 
                                                 <div class="row">
                                                     <div hidden class="form-group col-md-12">
-                                                        <input type="number" hidden class="form-control" id="id" name="id" value="{{ auth()->user()->id }}">
+                                                        {{-- <input type="number" hidden class="form-control" id="id" name="id" value="{{ auth()->user()->id }}"> --}}
                                                       </div>
                                                     <div class="form-group col-md-6">
                                                         <label> Name <span class="required">*</span></label>
-                                                        <input  class="form-control inputs-valid-compte" name="name" type="text" value="{{ auth()->user()->name }}">
-                                                        <div id="name-error" class="text-danger inputs-error-compte">
-                                                        </div>
+                                                        <input  class="form-control inputs-valid-compte @error('name') is-invalid @enderror" name="name" type="text" value="{{ auth()->user()->name }}">
+                                                        {{-- <div id="name-error" class="text-danger   inputs-error-compte">
+                                                        </div> --}}
+                                                        <div class="invalid-feedback">
+                                                            @error('name')
+                                                            {{ $message }}
+                                                            @enderror
+                                                          </div>
                                                     </div>
 
 
                                                     <div class="form-group col-md-6">
                                                         <label>Email Address <span class="required">*</span></label>
-                                                        <input required="" class="form-control inputs-valid-compte" name="email" type="email" value="{{ auth()->user()->email}}">
-                                                        <div id="email-error" class="text-danger inputs-error-compte">
-                                                        </div>
+                                                        <input required="" class="form-control inputs-valid-compte @error('email') is-invalid @enderror" name="email" type="email" value="{{ auth()->user()->email}}">
+                                                        {{-- <div id="email-error" class="text-danger  inputs-error-compte">
+                                                        </div> --}}
+                                                        <div class="invalid-feedback">
+                                                            @error('email')
+                                                            {{ $message }}
+                                                            @enderror
+                                                          </div>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>Current Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control inputs-valid-compte " name="password_old" type="password">
-                                                        <div id="password_old-error" class="text-danger inputs-error-compte">
-                                                        </div>
+                                                        <input required="" class="form-control inputs-valid-compte @error('password_old') is-invalid @enderror " name="password_old" type="password">
+                                                        {{-- <div id="password_old-error" class="text-danger inputs-error-compte">
+                                                        </div> --}}
+                                                        <div class="invalid-feedback">
+                                                            @error('password_old')
+                                                            {{ $message }}
+                                                            @enderror
+                                                          </div>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label>New Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control inputs-valid-compte " name="password_new" type="password">
-                                                        <div id="password_new-error" class="text-danger inputs-error-compte">
-                                                        </div>
+                                                        <input required="" class="form-control inputs-valid-compte @error('password_new') is-invalid @enderror " name="password_new" type="password">
+                                                        {{-- <div id="password_new-error" class="text-danger inputs-error-compte">
+                                                        </div> --}}
+                                                        <div class="invalid-feedback">
+                                                            @error('password_new')
+                                                            {{ $message }}
+                                                            @enderror
+                                                          </div>
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Confirm Password <span class="required">*</span></label>
-                                                        <input required="" class="form-control inputs-valid-compte" name="password_confirm" type="password">
-                                                        <div id="password_confirm-error" class="text-danger inputs-error-compte">
-                                                        </div>
+                                                        <input required="" class="form-control inputs-valid-compte @error('password_confirm') is-invalid @enderror" name="password_confirm" type="password">
+                                                        {{-- <div id="password_confirm-error" class="text-danger inputs-error-compte">
+                                                        </div> --}}
+                                                        <div class="invalid-feedback">
+                                                            @error('password_confirm')
+                                                            {{ $message }}
+                                                            @enderror
+                                                          </div>
                                                     </div>
                                                     <div class="col-md-12 text-center">
                                                         <button type="submit" class="btn btn-fill-out submit" name="submit" value="Submit">Save</button>
