@@ -1,4 +1,16 @@
 (function ($) {
+/*--------add loading image in my website---------*/
+    $("#loading").show();
+    $(".main").hide();
+
+    // Hide the loading image after 4 seconds
+    setTimeout(function() {
+        $("#loading").hide();
+        $(".main").show();
+    }, 1000);
+
+
+/*-----------------end loading-------------*/
     // "use strict";
     // // Page loading
     // $(window).on('load', function() {

@@ -20,7 +20,11 @@
    @include('e-commerce.navbar')
     {{-- sidebar --}}
    @include('e-commerce.sidebar')
+{{-- load --}}
+<div id="loading">
+    <img  src="{{ asset('assets/833.gif') }}" alt="Loading...">
 
+</div>
 {{-- Main --}}
 <main class="main">
     @yield('main')

@@ -21,6 +21,7 @@ use App\Models\SubCategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 // index
 Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');
 // shop

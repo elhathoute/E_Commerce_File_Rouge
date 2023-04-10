@@ -1,5 +1,29 @@
 @extends('layouts.master')
 @section('main')
+@php
+// men
+    $products_men=App\Models\Products::select('products.*','categories.name as category','sub_categories.name as subcategory')
+    ->join('categories', 'products.category_id', '=', 'categories.id')
+    ->join('sub_categories', 'products.sub_category_id', '=', 'sub_categories.id')
+    ->where('categories.name', '=', 'men')
+    ->get();
+    // women
+    $products_women=App\Models\Products::select('products.*','categories.name as category','sub_categories.name as subcategory')
+    ->join('categories', 'products.category_id', '=', 'categories.id')
+    ->join('sub_categories', 'products.sub_category_id', '=', 'sub_categories.id')
+    ->where('categories.name', '=', 'women')
+    ->get();
+    // children
+    $products_children=App\Models\Products::select('products.*','categories.name as category','sub_categories.name as subcategory')
+    ->join('categories', 'products.category_id', '=', 'categories.id')
+    ->join('sub_categories', 'products.sub_category_id', '=', 'sub_categories.id')
+    ->where('categories.name', '=', 'children')
+    ->get();
+
+
+    @endphp
+
+{{-- section main --}}
     <section class="home-slider position-relative pt-50">
         <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
             <div class="single-hero-slider single-animation-wrap">
@@ -19,7 +43,7 @@
                                 {{-- <img class="animated slider-1-1" src="assets/imgs/slider/slider-1.png" alt=""> --}}
                                 <video class="mobile-video" autoplay="true" playsinline="" preload="auto" muted="true" loop="" width="100%">
                                     <source src="https://files-bs.b-cdn.net/video/2023/0317/march_hero_mobile_767x928720p.mp4" type="video/mp4">
-                                    Sorry, your browser doesn't support embedded videos.
+
                                 </video>
                             </div>
                         </div>
@@ -100,23 +124,25 @@
         <div class="bg-square"></div>
         <div class="container">
             <div class="tab-header">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs d-flex justify-content-between" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Featured</button>
+                        <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Man</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Popular</button>
+                        <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Women</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">New added</button>
+                        <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Children</button>
                     </li>
                 </ul>
-                <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
+                {{-- <a href="#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a> --}}
             </div>
             <!--End nav-tabs-->
             <div class="tab-content wow fadeIn animated" id="myTabContent">
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4">
+                        @foreach ($products_men as $men )
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
@@ -129,25 +155,27 @@
                                     <div class="product-action-1">
                                         <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                         <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                        {{-- <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a> --}}
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
                                         <span class="hot">Hot</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
-                                    <div class="product-category">
-                                        <a href="shop.html">Clothing</a>
+                                    <div class="product-category d-flex justify-content-between">
+                                        <a href="shop.html">{{ $men->category }}</a>
+                                        <a href="shop.html">{{ $men->subcategory }}</a>
                                     </div>
-                                    <h2><a href="product-details.html">Colorful Pattern Shirts</a></h2>
+                                    <h2><a href="product-details.html">{{ $men->name }}</a></h2>
                                     <div class="rating-result" title="90%">
                                         <span>
-                                            <span>90%</span>
+                                            <span>{{ $men->offer }}%</span>
                                         </span>
                                     </div>
                                     <div class="product-price">
-                                        <span>$238.85 </span>
-                                        <span class="old-price">$245.8</span>
+                                        <span>
+                                            {{ ($men->price)-($men->price*$men->offer/(100)) }}DH</span>
+                                        <span class="old-price">{{ $men->price }}DH</span>
                                     </div>
                                     <div class="product-action-1 show">
                                         <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
@@ -155,7 +183,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                        @endforeach
+
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
@@ -416,14 +446,57 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--End product-grid-4-->
                 </div>
                 <!--En tab one (Featured)-->
                 <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
                     <div class="row product-grid-4">
+                        @foreach ($products_women as $women )
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product-details.html">
+                                            <img class="default-img" src="assets/imgs/shop/product-1-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                        {{-- <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a> --}}
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category d-flex justify-content-between">
+                                        <a href="shop.html">{{ $women->category }}</a>
+                                        <a href="shop.html">{{ $women->subcategory }}</a>
+                                    </div>
+                                    <h2><a href="product-details.html">{{ $women->name }}</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                            <span>{{ $women->offer }}%</span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>
+                                            {{ ($women->price)-($women->price*$women->offer/(100)) }}DH</span>
+                                        <span class="old-price">{{ $women->price }}DH</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
@@ -722,14 +795,57 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--End product-grid-4-->
                 </div>
                 <!--En tab two (Popular)-->
                 <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
                     <div class="row product-grid-4">
+                        @foreach ($products_children as $children )
+
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
+                            <div class="product-cart-wrap mb-30">
+                                <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                        <a href="product-details.html">
+                                            <img class="default-img" src="assets/imgs/shop/product-1-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                        {{-- <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a> --}}
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="hot">Hot</span>
+                                    </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                    <div class="product-category d-flex justify-content-between">
+                                        <a href="shop.html">{{ $children->category }}</a>
+                                        <a href="shop.html">{{ $children->subcategory }}</a>
+                                    </div>
+                                    <h2><a href="product-details.html">{{ $children->name }}</a></h2>
+                                    <div class="rating-result" title="90%">
+                                        <span>
+                                            <span>{{ $children->offer }}%</span>
+                                        </span>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>
+                                            {{ ($children->price)-($children->price*$children->offer/(100)) }}DH</span>
+                                        <span class="old-price">{{ $children->price }}DH</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="cart.html"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                        {{-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
@@ -1028,7 +1144,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!--End product-grid-4-->
                 </div>
