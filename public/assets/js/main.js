@@ -1,13 +1,11 @@
-(function ($) {
-/*--------add loading image in my website---------*/
-    $("#loading").show();
-    $("#loading").css('z-index', 10);
-    // $(".main").hide();
+$(document).ready(function() {
 
-    // Hide the loading image after 4 seconds
-    setTimeout(function() {
-        $("#loading").hide();
-    }, 2000);
+/*--------add loading image in my website---------*/
+$("#loading").show();
+$("#loading").css('z-index',10);
+setTimeout(function() {
+    $("#loading").hide();
+}, 3000);
 
 
 /*-----------------end loading-------------*/
@@ -819,5 +817,5 @@ $('.product-img').slick({
         showItems: 1
     });
 
-})(jQuery);
+});
 
