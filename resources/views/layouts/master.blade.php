@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"></head>
 
+
+
+
 <body>
    {{-- navbar --}}
    @include('e-commerce.navbar')
@@ -57,9 +60,17 @@
 <script src="{{asset('assets/js/plugins/jquery.vticker-min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/jquery.theia.sticky.js')}}"></script>
 <script src="{{asset('assets/js/plugins/jquery.elevatezoom.js')}}"></script>
+
+
+
+
+
+
 <!-- Template  JS -->
 <script src="{{asset('assets/js/main.js?v=3.3')}}"></script>
 <script src="{{asset('assets/js/shop.js?v=3.3')}}"></script>
+
+
 
 </body>
 

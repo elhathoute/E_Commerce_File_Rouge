@@ -1,16 +1,28 @@
 (function ($) {
 /*--------add loading image in my website---------*/
     $("#loading").show();
-    $(".main").hide();
+    $("#loading").css('z-index', 10);
+    // $(".main").hide();
 
     // Hide the loading image after 4 seconds
     setTimeout(function() {
         $("#loading").hide();
-        $(".main").show();
-    }, 1000);
+    }, 2000);
 
 
 /*-----------------end loading-------------*/
+$('.product-img').slick({
+    slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        loop: true,
+        dots: false,
+        arrows: true,
+        prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left" style="    color: red;font-size: 14px;font-weight: bold;"></i></span>',
+        nextArrow: '<span class="slider-btn slider-next" style=" position: absolute !important;top: 0 !important;left: 90% !important; color: red;font-size: 14px; font-weight: bold;"><i class="fi-rs-angle-right"></i></span>',
+        autoplay: true,
+  });
+
     // "use strict";
     // // Page loading
     // $(window).on('load', function() {
@@ -224,9 +236,10 @@
     $('.hero-slider-1').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
+        speed:3000,
         fade: true,
         loop: true,
-        dots: true,
+        dots: false,
         arrows: true,
         prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
         nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',

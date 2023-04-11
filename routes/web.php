@@ -7,6 +7,7 @@ use App\Http\Controllers\GithubSocialiteController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinkedinSocialiteController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\SubCategory;
@@ -46,6 +47,9 @@ Route::controller(AuthController::class)->group(function(){
 
 
 });
+/*-------view product---------------*/
+Route::get('view/product/{id}',[ProductController::class,'view_product'])->name('e-commerce.view_product');
+/*-------end view product------------*/
 
 /*---------------category------------*/
 

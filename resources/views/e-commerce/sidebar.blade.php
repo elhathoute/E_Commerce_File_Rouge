@@ -6,7 +6,7 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
-                <a href="{{ route('e-commerce.home') }}"><img src="assets/imgs/logo/logo_my_shoes.jpg" alt="logo"></a>
+                <a href="{{ route('e-commerce.home') }}"><img src="{{ asset('assets/imgs/logo/logo_my_shoes.jpg') }}" alt="logo"></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">

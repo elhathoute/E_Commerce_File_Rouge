@@ -9,7 +9,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="{{ route('e-commerce.home') }}"><img src="assets/imgs/logo/logo_my_shoes.jpg" alt="logo"></a>
+                    <a href="{{ route('e-commerce.home') }}"><img src="{{ asset('assets/imgs/logo/logo_my_shoes.jpg') }}" alt="logo"></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">

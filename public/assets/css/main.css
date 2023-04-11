@@ -1683,6 +1683,7 @@ label {
 .hero-slider-1 .single-slider-img-1 {
   height: 400px !important;
   position: relative;
+
 }
 
 .hero-slider-1 .single-slider-img-1 .slider-1-1 {
@@ -2269,7 +2270,7 @@ label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  justify-content: center !important;
+
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -3591,8 +3592,8 @@ table .product-thumbnail img {
 
 .product-cart-wrap .product-badges.product-badges-position {
   position: absolute;
-  left: 20px;
-  top: 19px;
+  left: 42%;
+  top: 2%;
   z-index: 9;
 }
 
@@ -9227,6 +9228,11 @@ span.fi-rs-apps {
 
 @media only screen and (max-width: 768px) {
     /*aziz*/
+    /* .slider-btn .slider-next{
+        position: absolute !important;
+        top: 0 !important;
+        left: 90% !important;
+    } */
 .alert{
     flex-direction: column;
 }
@@ -9239,7 +9245,7 @@ span.fi-rs-apps {
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        padding:15px 20px 20px 20px ;
+        padding:143px 20px 20px 20px ;
     }
     /* fin aziz */
     .btn-success{
@@ -9336,12 +9342,17 @@ span.fi-rs-apps {
   }
   .hero-slider-1 {
     height: 350px;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    background-image:url('https://img.freepik.com/free-photo/fashion-shoes-sneaker_1203-8081.jpg');
   }
   .hero-slider-1 .single-slider-img-1 {
     height: 350px;
   }
   .home-slider.pt-50 {
-    padding-top: 0 !important;
+    padding: 50px !important;
   }
   .hero-slider-content-2 h1 {
     font-size: 32px;
@@ -9618,6 +9629,7 @@ span.fi-rs-apps {
   }
   .hero-slider-1 {
     height: 500px;
+
   }
   .hero-slider-1 .single-slider-img-1 {
     height: 500px;
@@ -9641,10 +9653,10 @@ span.fi-rs-apps {
     line-height: 40px;
     font-size: 13px;
   }
-  .product-img-action-wrap .product-action-1 {
+  /* .product-img-action-wrap .product-action-1 {
     width: 100%;
     text-align: center;
-  }
+  } */
   .banner-big h1 {
     font-size: 22px;
   }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Size;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
             // seed category
             $categories=[
-            ['name'=>'Man'],
+            ['name'=>'Men'],
             ['name'=>'Women'],
             ['name'=>'Children']
             ];
@@ -38,6 +39,16 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Escarpins', 'image' => ''],
             ['name' => 'Ballerines', 'image' => '']
         ];
+        // sizes
+        $sizes=[
+            ['size'=>40],
+            ['size'=>41],
+            ['size'=>42],
+            ['size'=>43],
+        ];
+        for($i=0;$i<=3;$i++){
+        Size::create($sizes[$i]);
+        }
 
             for($i=0;$i<=2;$i++){
                 $category=Category::create($categories[$i]);
