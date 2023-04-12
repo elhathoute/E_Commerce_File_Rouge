@@ -13,10 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sizes', function (Blueprint $table) {
+        Schema::create('detail_products', function (Blueprint $table) {
             $table->id();
-            $table->string('size');
+            $table->string('semelle_int');
+            $table->string('semelle_ext');
+            $table->string('doubleure');
+            $table->string('tige');
+
+            $table->unsignedBigInteger('product_id');
+
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
@@ -27,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sizes');
+        Schema::dropIfExists('detail_products');
     }
 };

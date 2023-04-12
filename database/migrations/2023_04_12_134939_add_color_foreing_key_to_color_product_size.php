@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         // Schema::table('color_product_size', function (Blueprint $table) {
-        //     $table->integer('qte')->default('0');
+        //      $table->unsignedBigInteger('color_id');
+        //      $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+
+
         // });
     }
 
@@ -25,7 +28,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_size', function (Blueprint $table) {
+        Schema::table('color_product_size', function (Blueprint $table) {
             //
         });
     }

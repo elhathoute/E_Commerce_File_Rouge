@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::table('color_product_size', function (Blueprint $table) {
-        //     $table->integer('qte')->default('0');
-        // });
+        Schema::create('product_size', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('size_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_size', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('product_size');
     }
 };

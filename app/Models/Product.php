@@ -9,12 +9,33 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function sizes()
-    {
-        return $this->belongsToMany(Size::class);
-    }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
+    public function images(){
+        return $this->hasMany(Image::class);
+    }
+
+    public function brande(){
+        return $this->hasOne(Brande::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function sub_category(){
+        return $this->belongsTo(SubCategory::class);
+    }
+
+    public function detail_product(){
+        return $this->hasOne(DetailProduct::class);
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
+
 }

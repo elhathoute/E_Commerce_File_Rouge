@@ -9,8 +9,16 @@ class Size extends Model
 {
     use HasFactory;
 
+    // public function products(){
+    //     return $this->belongsToMany(Product::class);
+    // }
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class,'color_size')->withPivot('price','quantity','product_id');
+    }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class,'product_size');
     }
 }

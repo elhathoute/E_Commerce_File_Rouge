@@ -6,6 +6,7 @@
     ->join('categories', 'products.category_id', '=', 'categories.id')
     ->join('sub_categories', 'products.sub_category_id', '=', 'sub_categories.id')
     ->where('categories.name', '=', 'men')
+    ->with('images')
     ->get();
     // women
     $products_women=App\Models\Product::select('products.*','categories.name as category','sub_categories.name as subcategory')
@@ -170,29 +171,35 @@
                 <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                     <div class="row product-grid-4">
                         @foreach ($products_men as $men )
-
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
 
 
                                     <div class="product-img product-img-zoom">
+
+                                        @foreach ($men->images as $image)
+
                                         <div>
-                                            <img class="default" src="{{ asset('assets/imgs/shop/product-1-1.jpg') }} " alt="">
+                                            <img class="default" src="{{ asset('assets/imageProducts/'.$image->image) }} " alt="">
 
                                             {{-- <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg" alt=""> --}}
                                         </div>
-                                        <div>
+                                        @endforeach
+
+
+
+                                        {{-- <div> --}}
                                             {{-- <img class="default-img" src="assets/imgs/shop/product-1-1.jpg" alt=""> --}}
-                                            <img class="default" src="{{ asset('assets/imgs/shop/product-1-2.jpg') }} " alt="">
+                                            {{-- <img class="default" src="{{ asset('assets/imgs/shop/product-1-2.jpg') }} " alt="">
 
-                                        </div>
-                                        <div>
+                                        </div> --}}
+                                        {{-- <div> --}}
                                             {{-- <img class="default-img" src="assets/imgs/shop/product-1-1.jpg" alt=""> --}}
 
-                                            <img class="default" src="{{ asset('assets/imgs/shop/product-10-2.jpg') }} " alt="">
+                                            {{-- <img class="default" src="{{ asset('assets/imgs/shop/product-10-2.jpg') }} " alt="">
 
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="product-action-1">
                                         {{-- <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a> --}}
@@ -210,7 +217,7 @@
                                         <a href="shop.html">{{ $men->category }}</a>
                                         <a href="shop.html">{{ $men->subcategory }}</a>
                                     </div>
-                                    <h2><a href="product-details.html">{{ $men->name }}</a></h2>
+                                    <h2><a href="{{route('e-commerce.view_product',['id'=>$men->id]) }}">{{ $men->name }}</a></h2>
                                     <div class="rating-result" title="90%">
                                         <span>
                                             <span>{{ $men->offer }}%</span>
@@ -1303,10 +1310,17 @@
             <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-3-arrows"></div>
                 <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
+                    @php
+                        $brandes=App\Models\Brande::all();
+                    @endphp
+                    @foreach ($brandes as $brande )
+
                     <div class="brand-logo">
-                        <img class="img-grey-hover" src="assets/imgs/banner/brand-1.png" alt="">
+                        <img class="img-grey-hover" src="{{ asset('assets/imageBrande/'.$brande->image) }}" alt="brande">
                     </div>
-                    <div class="brand-logo">
+                    @endforeach
+
+                    {{-- <div class="brand-logo">
                         <img class="img-grey-hover" src="assets/imgs/banner/brand-2.png" alt="">
                     </div>
                     <div class="brand-logo">
@@ -1323,7 +1337,7 @@
                     </div>
                     <div class="brand-logo">
                         <img class="img-grey-hover" src="assets/imgs/banner/brand-3.png" alt="">
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

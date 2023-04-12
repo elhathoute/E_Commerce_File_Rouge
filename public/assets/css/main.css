@@ -4524,29 +4524,47 @@ table .product-thumbnail img {
   background: #ff596d;
 }
 
-.product-color-yellow {
-  background: #ffdb33;
+
+.product-color-green {
+    background-color: #00ff00;
 }
 
-.product-color-white {
-  background: #ffffff;
+.product-color-blue {
+    background-color: #0000ff;
+}
+
+.product-color-yellow {
+    background-color: #ffff00;
 }
 
 .product-color-orange {
-  background: #ffbb51;
-}
-
-.product-color-cyan {
-  background: #80e6ff;
-}
-
-.product-color-green {
-  background: #38cf46;
+    background-color: #ffa500;
 }
 
 .product-color-purple {
-  background: #ff8ff8;
+    background-color: #800080;
 }
+
+.product-color-pink {
+    background-color: #ffc0cb;
+}
+
+.product-color-brown {
+    background-color: #a52a2a;
+}
+
+.product-color-gray {
+    background-color: #808080;
+}
+
+.product-color-white {
+    background-color: #ffffff;
+}
+
+.product-color-black {
+    background-color: #000000;
+}
+
 
 .detail-gallery .slick-slider {
   background-color: #000;

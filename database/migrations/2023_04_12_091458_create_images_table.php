@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::table('color_product_size', function (Blueprint $table) {
-        //     $table->integer('qte')->default('0');
-        // });
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->string('image');
+            $table->unsignedBigInteger('product_id');
+            $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products');
+        });
     }
 
     /**
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('product_size', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('images');
     }
 };
