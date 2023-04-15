@@ -7,6 +7,8 @@ use App\Http\Controllers\GithubSocialiteController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinkedinSocialiteController;
+use App\Http\Controllers\PaimentController;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubCategoryController;
@@ -22,12 +24,36 @@ use App\Models\SubCategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// paiment create
+Route::get('/paiment/create/{id}',[PaimentController::class ,'create'])->middleware('auth')->name('e-commerce.paiment');
+// paiment store (change from panier->order)
+Route::POST('/paiment/store_paiment/{id}',[PaimentController::class ,'store_paiment'])->middleware('auth')->name('e-commerce.store_paiment');
 
 // index
 Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');
-// shop
-Route::get('/shop',[ShopController::class,'shop'])->name('e-commerce.shop');
 
+// product
+Route::get('/product',[ProductController::class ,'index'])->name('e-commerce.product');
+//view to add product
+Route::get('/product/create',[ProductController::class ,'create'])->name('e-commerce.create_product');
+// shop
+Route::get('/shop/{parametre?}',[ShopController::class,'shop'])->name('e-commerce.shop');
+
+// show  paniers
+Route::get('/panier',[PanierController::class ,'panier'])->middleware('auth')->name('e-commerce.panier');
+//show one order
+Route::get('/order/{id}',[PanierController::class ,'order'])->middleware('auth')->name('e-commerce.order');
+
+//add to panier (main)
+Route::get('/add_to_panier/{id}',[PanierController::class ,'add_to_panier'])->middleware('auth')->name('e-commerce.add_to_panier');
+// add to wishlist (main)
+Route::get('/add_to_wishlist/{id}',[PanierController::class ,'add_to_wishlist'])->middleware('auth')->name('e-commerce.add_to_wishlist');
+
+// delete panier
+Route::get('delete/panier/{id}',[PanierController::class ,'delete_panier'])->middleware('auth')->name('e-commerce.delete_panier');
+
+// wishlist
+Route::get('/wishlist',[PanierController::class ,'wishlist'])->middleware('auth')->name('e-commerce.wishlist');
 
 Route::controller(AuthController::class)->group(function(){
     // register

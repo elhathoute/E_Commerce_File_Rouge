@@ -63,6 +63,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php
+                               $orders=App\Models\Panier::where('user_id','=',auth()->user()->id)
+                              ->where('etat','=','order')
+                              ->get();
+                                @endphp
                                 <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="card">
                                         <div class="card-header">
@@ -75,33 +80,30 @@
                                                         <tr>
                                                             <th>Order</th>
                                                             <th>Date</th>
-                                                            <th>Status</th>
+                                                            <th>Qte</th>
+                                                            <th>Price</th>
+                                                            <th>Color</th>
+                                                            <th>Size</th>
                                                             <th>Total</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach ($orders as  $order)
+
                                                         <tr>
-                                                            <td>#1357</td>
-                                                            <td>March 45, 2022</td>
-                                                            <td>Processing</td>
-                                                            <td>$125.00 for 2 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
+                                                            <td>#{{ $order->id }}</td>
+                                                            <td>{{ $order->date }}</td>
+                                                            <td>{{ $order->quantity }}</td>
+                                                            <td>{{ $order->price }}</td>
+                                                            <td>{{ $order->color->name }}</td>
+                                                            <td>{{ $order->size->size }}</td>
+                                                            <td>{{ $order->total }}</td>
+                                                            <td><a href="{{ route('e-commerce.order',['id'=>$order->id]) }}" class="btn-small d-block">View</a></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td>#2468</td>
-                                                            <td>June 29, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$364.00 for 5 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>#2366</td>
-                                                            <td>August 02, 2022</td>
-                                                            <td>Completed</td>
-                                                            <td>$280.00 for 3 item</td>
-                                                            <td><a href="#" class="btn-small d-block">View</a></td>
-                                                        </tr>
+                                                        @endforeach
+
+
                                                     </tbody>
                                                 </table>
                                             </div>

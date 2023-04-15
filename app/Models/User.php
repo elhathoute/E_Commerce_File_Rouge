@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function paniers()
+    {
+        return $this->hasMany(Panier::class);
+    }
     public function reviews()
     {
         return $this->hasMany(Review::class);

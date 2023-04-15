@@ -20,9 +20,7 @@
                         <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
                             <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
                             <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                            <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
                             <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
                         </div>
                     </div>

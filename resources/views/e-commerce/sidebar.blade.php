@@ -17,9 +17,11 @@
         </div>
         <div class="mobile-header-content-area">
             <div class="mobile-search search-style-3 mobile-header-border">
-                <form action="#">
-                    <input type="text" placeholder="Search for Shoes…">
-                    <button type="submit"><i class="fi-rs-search"></i></button>
+                <form action="{{ route('e-commerce.shop')  }}" method="GET">
+                    @csrf
+                    <input
+
+                     type="text" name="parametre" placeholder="Name Category SubCategory Size..." ">
                 </form>
             </div>
             <div class="mobile-menu-wrap mobile-header-border">
@@ -33,7 +35,9 @@
                             <ul class="dropdown">
                                 @foreach ($categories as $category )
 
-                                <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">{{ $category->name }} </a>
+                                <li class="menu-item-has-children"><span class="menu-expand"></span>
+                                    <a class="menu-title" href="{{ route('e-commerce.shop',['parametre'=>$category->name]) }}">{{ $category->name }} </a>
+
                                     <ul class="dropdown">
                                         <!-- <li><a href="product-details.html">Dresses</a></li>
                                         <li><a href="product-details.html">Blouses & Shirts</a></li>
@@ -41,11 +45,15 @@
                                         <li><a href="product-details.html">Women's Sets</a></li> -->
                                         @foreach ($category->subCategories as $subcategory)
 
-                                        <li>
+                                        <li class="d-flex align-items-center justify-content-between">
                                             <a class="href-collection" href="#">
                                                 <img class="image-collection"
-                                                src="{{ asset('assets/imageSubCategory/'.$subcategory->image) }}" alt="" srcset="">
-                                                    {{ $subcategory->name }}</a>
+                                               src="{{ asset('assets/imageSubCategory/'.$subcategory->image) }}" alt="" srcset="">
+
+
+                                                </a>
+                                                <span> <a href="{{ route('e-commerce.shop',['parametre'=>$subcategory->name]) }}">{{ $subcategory->name }}</a> </span>
+
                                         </li>
                                         @endforeach
                                     </ul>
@@ -61,7 +69,7 @@
                             <ul class="sub-menu  dropdown">
                                 <li><a href="{{ route('e-commerce.user.profile') }}">Dashboard</a></li>
                                 @if (auth()->user()->role=='admin')
-                                <li><a href="#">Products</a></li>
+                                <li><a href="{{ route('e-commerce.product') }}">Products</a></li>
                                 <li><a href="{{ route('e-commerce.category') }}">Categories</a></li>
                                 <li><a href="{{ route('e-commerce.subcategory') }}">SubCategories</a></li>
                                 <li><a href="#">Sizes</a></li>
@@ -117,9 +125,9 @@
             <div class="mobile-social-icon">
                 <h5 class="mb-15 text-grey-4">Follow Us</h5>
                 <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
-                <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
+
                 <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
-                <a href="#"><img src="assets/imgs/theme/icons/icon-pinterest.svg" alt=""></a>
+
                 <a href="#"><img src="assets/imgs/theme/icons/icon-youtube.svg" alt=""></a>
             </div>
         </div>

@@ -19,7 +19,7 @@ class Product extends Model
     }
 
     public function brande(){
-        return $this->hasOne(Brande::class);
+        return $this->belongsTo(Brande::class);
     }
 
     public function category(){
@@ -36,6 +36,10 @@ class Product extends Model
     public function sizes()
     {
         return $this->belongsToMany(Size::class);
+    }
+    public function paniers()
+    {
+        return $this->hasMany(Panier::class);
     }
 
 }

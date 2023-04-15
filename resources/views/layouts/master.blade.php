@@ -14,8 +14,8 @@
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/logo-website.svg') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"></head>
-
-
+{{-- flowbite tailwind--}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
 
 
 <body>
@@ -60,6 +60,9 @@
 <script src="{{asset('assets/js/plugins/jquery.vticker-min.js')}}"></script>
 <script src="{{asset('assets/js/plugins/jquery.theia.sticky.js')}}"></script>
 <script src="{{asset('assets/js/plugins/jquery.elevatezoom.js')}}"></script>
+
+{{-- flowbite tailwind --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
 
 
 

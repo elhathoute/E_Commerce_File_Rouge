@@ -13,4 +13,9 @@ class Color extends Model
     {
         return $this->belongsToMany(Size::class,'color_size');
     }
+
+    public function paniers()
+    {
+        return $this->belongsToMany(Panier::class,'product_size');
+    }
 }

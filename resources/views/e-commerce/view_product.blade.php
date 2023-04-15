@@ -20,7 +20,7 @@
 <section class="pt-50 pb-50 ">
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="product-detail accordion-detail">
                 <div class="row mb-50">
                     <div class="col-md-6 col-sm-12 col-xs-12">
@@ -101,11 +101,13 @@
                                 </div>
                             </div>
                             <div class="clearfix product-price-cover">
-                                <div class="product-price primary-color float-left">
-                                    <ins><span class="text-brand">{{ ($product->price)-($product->price*$product->offer/(100)) }}DH</span></ins>
-                                    <ins><span class="old-price font-md ml-15">{{ $product->price }}DH</span></ins>
-                                    <span class="save-price  font-md color3 ml-15">{{ $product->offer }}% Off</span>
-                                </div>
+                                {{-- <div class="product-price primary-color float-left">
+
+                                    <ins><span class="text-brand" id="new_price"></span></ins>
+                                    <ins><span class="old-price font-md ml-15" id="old_price"></span></ins>
+                                    <span class="save-price  font-md color3 ml-15" id="offer"></span>
+
+                                </div> --}}
                             </div>
                             <div class="bt-1 border-color-1 mt-15 mb-15"></div>
                             <div class="short-desc mb-30">
@@ -115,69 +117,126 @@
                                 </span>
                             </div>
 
-                            <div class="attr-detail attr-color mb-15">
-
-                                <strong class="mr-10">Color</strong>
-                                <ul class="list-filter color-filter">
-
-
-                                    @foreach ($product->sizes as $index=>$size )
-                                    @foreach ($size->colors as $color)
-                                    <li class="{{ $index===0 ? 'active' :'' }}"><a href="#" data-color="{{ $color->name }}"><span class="product-color-{{ $color->name }}"></span></a></li>
-                                    {{-- <li><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                    <li class="active"><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                    <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                    <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                    <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                    <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li> --}}
-                                    @endforeach
-                                    @endforeach
-                                </ul>
-
-
-
-
-
-                            </div>
-                            <div class="attr-detail attr-size">
-                                <strong class="mr-10">Size</strong>
+                            <div class="attr-detail attr-size mb-15">
+                                {{-- <strong class="mr-10">Size</strong> --}}
                                 <ul class="list-filter size-filter font-small">
 
-
-
-
                                   @php
-
-
                                     $totalQte = 0; //initialise totalQte
-
                                     @endphp
 
                                     @foreach ($product->sizes as $index=>$size )
-                                    @foreach ($size->colors as $color)
+                                    @foreach ($size->colors->where('pivot.product_id', $product->id) as $color)
 
                                     @php
 
                                     $totalQte+=$color->pivot->quantity; //calculate the total qte of sizes
                                      @endphp
-                                    <li class="{{ $index === 0 ? 'active' : '' }}"><a href="#">{{ $size->size}}|<span style="color:rgb(0, 89, 255);">stock:{{ $color->pivot->quantity }}</span></a></li>
 
+                                     @if($color->pivot->quantity >0)
+                                                 <div class="d-flex align-items-center me-4 mb-3">
+
+                                                    <input
+                                                    data-id={{ rand(1,10000) }}
+                                                    data-product-id="{{ json_encode($product->id) }}"
+                                                    data-product-size="{{ json_encode($size->size) }}"
+                                                    data-size-id="{{ json_encode($size->id) }}"
+                                                    data-product-color="{{ json_encode($color->name) }}"
+                                                    data-color-id="{{ json_encode($color->id) }}"
+                                                    data-product-price="{{ json_encode(($color->pivot->price)-((($color->pivot->price)*($color->pivot->offer))/100)) }}"
+                                                    class="me-1 check-to-add-panier"
+                                                    style="max-width: 40px; max-height: 18px;"
+                                                     type="checkbox" name="" id="">
+                                                    <input
+                                                    class="me-1 number-of-product"
+                                                    style=" max-height: 34px;max-width: 100px;"
+                                                    type="number" name="" id="" min="0" max="{{$color->pivot->quantity}}" value="{{$color->pivot->quantity}}">
+                                                </div>
+                                   <div class="d-flex align-items-center">
+
+                                    <div class="d-flex align-items-center me-2">
+                                   <li
+                                    data-price="{{ $color->pivot->price }}"
+                                    data-offer="{{ $color->pivot->offer }}"
+                                    data-price-offer="{{ ($color->pivot->price)-((($color->pivot->price)*($color->pivot->offer))/100) }}"
+                                    class="active product_size me-2">
+                                    <a href="#">{{ $size->size}}</a>
+                                </li>
+                                <li><span class="me-2">stock:{{ (($color->pivot->quantity)<10) ? '0'.$color->pivot->quantity : $color->pivot->quantity }}</span></li>
+                                <ul class="list-filter color-filter">
+
+
+                                    <li
+                                    class="active"><a class="bg-secondary" href="#" data-color="{{ $color->name }}"><span class="product-color-{{ $color->name }}"></span></a></li>
+
+
+                                </ul>
+                            </div>
+                            <div class="product-price primary-color float-left d-flex align-items-center">
+
+                                <ins><span class="text-brand" id="new_price">
+                                    {{ ($color->pivot->price)-(($color->pivot->price)*($color->pivot->offer)/100) }}DH
+
+                                    </span></ins>
+                                <ins><span class="old-price font-md ml-15" id="old_price">
+                                    {{ $color->pivot->price }}
+                                </span></ins>
+                                <span class="save-price  font-md color3 ml-15" id="offer">
+                                    -{{ $color->pivot->offer }}%
+                                </span>
+
+
+
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        @endif
                                     @endforeach
                                     @endforeach
 
 
                                 </ul>
                             </div>
+                            <div class="attr-detail attr-color ">
+
+                                <strong class="mr-10">#Color</strong>
+                                <ul class="list-filter color-filter">
+
+                                    @foreach ($product->sizes as $index=>$size )
+                                    @foreach ($size->colors->where('pivot.product_id', $product->id) as $color)
+                                    <li
+                                    class="no-active"><a href="#" data-color="{{ $color->name }}"><span class="product-color-{{ $color->name }}"></span></a>
+                                </li>
+
+                                    @endforeach
+                                    @endforeach
+                                </ul>
+
+                            </div>
+                            {{-- size --}}
+                              <div class="attr-detail attr-color ">
+
+                                <strong class="mr-10">#Size</strong>
+                                <ul class="list-filter color-filter">
+
+                                    @foreach ($product->sizes as $index=>$size )
+                                    <li
+                                    class="no-active"><a href="#" ><span class="">{{ $size->size }}</span></a>
+                                </li>
+
+                                    @endforeach
+                                </ul>
+
+                            </div>
+
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                             <div class="detail-extralink">
-                                <div class="detail-qty border radius">
-                                    <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                    <span class="qty-val">1</span>
-                                    <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                </div>
+                              
                                 <div class="product-extra-link2">
-                                    <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                    <button type="submit" class="button button-add-to-cart" id="add-to-panier" >Add to cart</button>
+                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{{ route('e-commerce.add_to_wishlist',['id'=>$product->id]) }}"><i class="fi-rs-heart"></i></a>
 
                                 </div>
                             </div>

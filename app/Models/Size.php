@@ -14,11 +14,16 @@ class Size extends Model
     // }
     public function colors()
     {
-        return $this->belongsToMany(Color::class,'color_size')->withPivot('price','quantity','product_id');
+        return $this->belongsToMany(Color::class,'color_size')->withPivot('price','quantity','offer','product_id');
     }
 
     public function products()
     {
         return $this->belongsToMany(Product::class,'product_size');
+    }
+
+    public function paniers()
+    {
+        return $this->belongsToMany(Panier::class,'product_size');
     }
 }

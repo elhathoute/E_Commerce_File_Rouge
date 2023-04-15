@@ -2,6 +2,21 @@
            $categories=App\Models\Category::with('subCategories')->get();
 
 @endphp
+@auth
+@php
+
+
+                            $wishlist=App\Models\Panier::where('user_id','=',auth()->user()->id)
+                            ->where('etat','=','wishlist')
+                            ->count();
+                            $panier=App\Models\Panier::where('user_id','=',auth()->user()->id)
+                            ->where('etat','=','panier')
+                            ->count();
+@endphp
+
+                            @endif
+
+
 
 <header class="header-area header-style-1 header-height-2">
 
@@ -13,25 +28,40 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
-                        <form action="#">
-                            <input type="text" placeholder="Search for Shoes...">
+                        <form action="{{ route('e-commerce.shop')  }}" method="GET">
+                            @csrf
+                            <input
+                            style="background-color: #cc8d1526;"
+                             type="text" name="parametre" placeholder="Name Category SubCategory Size...">
                         </form>
                     </div>
 
                     <div class="header-action-right">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.php">
+                                <a href="{{ route('e-commerce.wishlist') }}">
                                     <img class="svgInject" alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
-                                    <span class="pro-count blue">4</span>
+                                    <span class="pro-count blue">
+                                        @auth{{ $wishlist }}@endauth
+                                        @guest
+                                {{ 0 }}
+                                    @endguest
+                                </span>
+
+
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="cart.html">
+                                <a class="mini-cart-icon" href="{{ route('e-commerce.panier') }}">
                                     <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
-                                    <span class="pro-count blue">2</span>
+                                    <span class="pro-count blue">
+                                        @auth{{ $panier }}@endauth
+                                        @guest
+                                {{ 0 }}
+                                    @endguest
+                                    </span>
                                 </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                {{-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>
                                         <li>
                                             <div class="shopping-cart-img">
@@ -67,7 +97,7 @@
                                             <a href="checkout.html">Checkout</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -94,18 +124,20 @@
                                         @foreach ($categories as $category )
 
                                         <li class="sub-mega-menu sub-mega-menu-width-33">
-                                            <a class="menu-title" href="#">{{ $category->name }} </a>
+                                            <a class="menu-title" href="{{ route('e-commerce.shop',['parametre'=>$category->name]) }}">{{ $category->name }} </a>
                                             <ul>
                                                 @foreach ($category->subCategories as $subcategory)
 
-                                                <li>
+                                                <li class="d-flex align-items-center justify-content-around">
                                                     <a class="href-collection" href="#">
                                                         <img class="image-collection"
                                                        src="{{ asset('assets/imageSubCategory/'.$subcategory->image) }}" alt="" srcset="">
 
-                                                            {{ $subcategory->name }}
+
                                                         </a>
-                                                </li>
+                                                        <span> <a href="{{ route('e-commerce.shop',['parametre'=>$subcategory->name]) }}">{{ $subcategory->name }}</a> </span>
+
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                         </li>
@@ -128,7 +160,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="{{ route('e-commerce.user.profile') }}">Dashboard</a></li>
                                         @if(auth()->user()->role=="admin")
-                                        <li><a href="#">Products</a></li>
+                                        <li><a href="{{ route('e-commerce.product') }}">Products</a></li>
                                         <li><a href="{{ route('e-commerce.category') }}">Categories</a></li>
                                         <li><a href="{{ route('e-commerce.subcategory') }}">SubCategories</a></li>
                                         <li><a href="#">Sizes</a></li>
@@ -153,18 +185,29 @@
 
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
+
                         <div class="header-action-icon-2">
-                            <a href="shop-wishlist.php">
+                            <a href="{{ route('e-commerce.wishlist') }}">
                                 <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
-                                <span class="pro-count white">4</span>
+                                <span class="pro-count white">@auth{{ $wishlist }}@endauth
+                                    @guest
+                            {{ 0 }}
+                                @endguest</span>
+
                             </a>
                         </div>
                         <div class="header-action-icon-2">
-                            <a class="mini-cart-icon" href="cart.html">
+                            <a class="mini-cart-icon" href="{{ route('e-commerce.panier') }}">
                                 <img alt="Surfside Media" src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
-                                <span class="pro-count white">2</span>
+                                <span class="pro-count white">
+
+                                    @auth{{ $panier }}@endauth
+                                        @guest
+                                {{ 0 }}
+                                    @endguest
+                                </span>
                             </a>
-                            <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                            {{-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                 <ul>
                                     <li>
                                         <div class="shopping-cart-img">
@@ -200,7 +243,7 @@
                                         <a href="shop-checkout.php">Checkout</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="header-action-icon-2 d-block d-lg-none">
                             <div class="burger-icon burger-icon-white">

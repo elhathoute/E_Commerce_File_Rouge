@@ -1,11 +1,116 @@
 $(document).ready(function() {
+    /*------------validation form paiment----------------*/
 
+        $('#form-paiment').submit(function(event) {
+          var cardNumber = $('#card_number').val();
+          var expirationDate = $('#expiration_date').val();
+          var cvc = $('#cvc').val();
+
+          // Validate card number
+          if (!cardNumber.match(/^[0-9]{16}$/)) {
+            alert('Please enter a valid card number.');
+            event.preventDefault();
+            return false;
+          }
+
+          // Validate expiration date
+          if (!expirationDate.match(/^(0[1-9]|1[0-2])\/[0-9]{2}$/)) {
+            alert('Please enter a valid expiration date in the format MM/YY.');
+            event.preventDefault();
+            return false;
+          }
+
+          // Validate CVC
+          if (!cvc.match(/^[0-9]{4}$/)) {
+            alert('Please enter a valid CVC.');
+            event.preventDefault();
+            return false;
+          }
+
+          // If all validation passes, submit the form
+          return true;
+        });
+
+
+    /*----------------------------------------------------*/
+
+    /*---------------Send data(add panier) to database---*/
+   const Panier = [];
+    $('.check-to-add-panier').on('change',function(e){
+
+        if ($(this).prop('checked')) {
+            const num_product =$(this).closest('div').children('.number-of-product').val();
+            console.log(num_product)
+            const id_product= JSON.parse($(this).attr('data-product-id'));
+             const size_product =JSON.parse($(this).attr('data-product-size'));
+             const size_id =JSON.parse($(this).attr('data-size-id'));
+            const color_product= JSON.parse($(this).attr('data-product-color'));
+            const color_id= JSON.parse($(this).attr('data-color-id'));
+             const price_product =JSON.parse($(this).attr('data-product-price'));
+             const checkbox_id = $(this).attr('data-id');
+             function generateId() {
+                return Math.floor(Math.random() * 1000000);
+              }
+             add_to_panier={
+                'id':generateId(),
+                'checkbox_id': checkbox_id,
+                 'quantity':num_product,
+                 'id_product':id_product,
+                 'size_product':size_product,
+                 'size_id':size_id,
+                 'color_product':color_product,
+                 'color_id':color_id,
+                 'price_product':price_product,
+             }
+
+            Panier.push(add_to_panier);
+
+            console.log(Panier)
+
+          }else{
+
+            const checkbox_id = $(this).attr('data-id'); // get the unique identifier of the checkbox
+            const index_to_remove = Panier.findIndex(item => item.checkbox_id === checkbox_id); // find the index of the object with the corresponding checkbox_id
+            if (index_to_remove !== -1) {
+              Panier.splice(index_to_remove, 1); // remove the object at the found index
+            }
+            console.log(Panier);
+          }
+    })
+$('#add-to-panier').click(function(e){
+     $.ajax({
+          url: '/panier',
+          method: 'GET',
+          data: {
+            panier: JSON.stringify(Panier)
+          },
+          success: function(response) {
+            console.log(response);
+             setTimeout(function(){
+                // Redirect to /panier
+                window.location.href = '/panier';
+            }, 3000);
+          },
+          error: function(xhr, status, error) {
+            console.error(error);
+          }
+        });
+
+})
+
+        /*--------------------------------------------------*/
+/*-----------------drop panier li ----------*/
+    $('.icon-delete-panier').click(function(e){
+        $(this).closest('li').remove();
+    })
+/*--------------------------------------------------*/
 /*--------add loading image in my website---------*/
-$("#loading").show();
-$("#loading").css('z-index',10);
-setTimeout(function() {
-    $("#loading").hide();
-}, 3000);
+
+    $("#loading").show();
+    $("#loading").css('z-index',100);
+    setTimeout(function() {
+        $("#loading").hide();
+    }, 1000);
 
 
 /*-----------------end loading-------------*/
@@ -35,7 +140,7 @@ $('.product-img').slick({
 //     $('.edit-category').click(function(){
 
 
-//         const input_id_category = $('#id-category-input');
+//         const input_id_category = $('#data-id-category-input');
 //         const input_name_category = $('#name-category-input');
 //         const select_sub_category = $('.select2-selection__rendered');
 
@@ -518,21 +623,21 @@ $('.product-img').slick({
     /*---------------------
         Price range
     --------------------- */
-    var sliderrange = $('#slider-range');
-    var amountprice = $('#amount');
-    $(function() {
-        sliderrange.slider({
-            range: true,
-            min: 16,
-            max: 400,
-            values: [0, 300],
-            slide: function(event, ui) {
-                amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        amountprice.val("$" + sliderrange.slider("values", 0) +
-            " - $" + sliderrange.slider("values", 1));
-    });
+    // var sliderrange = $('#slider-range');
+    // var amountprice = $('#amount');
+    // $(function() {
+    //     sliderrange.slider({
+    //         range: true,
+    //         min: 10,
+    //         max: 1000,
+    //         values: [10, 500],
+    //         slide: function(event, ui) {
+    //             amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+    //         }
+    //     });
+    //     amountprice.val("$" + sliderrange.slider("values", 0) +
+    //         " - $" + sliderrange.slider("values", 1));
+    // });
 
     /*-------------------------------
         Sort by active
