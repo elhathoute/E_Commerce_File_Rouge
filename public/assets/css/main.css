@@ -12,6 +12,13 @@ body{
     background-color:#f5f5f5;
 
 }
+/*------load image of product in add */
+#image-preview img{
+    /* max-width: 200px !important;
+    max-height: 150px !important; */
+    border: 2px solid black;
+    border-radius: 10px;
+}
 .select2-container{
     width: 100% !important;
 }

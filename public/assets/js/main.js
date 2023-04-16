@@ -1,4 +1,30 @@
 $(document).ready(function() {
+    /*------------------show image selected----------*/
+    $('#images').on('change', function() {
+        // empty div of show images
+        // $('#image-preview').empty();
+        // get all files
+        var files = $(this)[0].files;
+    // loop to each file(image)
+        for (var i = 0; i < files.length; i++) {
+            //define a variable named file
+          var file = files[i];
+          /*creates a new instance of the FileReader object,
+          which is used to read the contents of the file*/
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            var image = $('<img>').attr('src', e.target.result);
+           var div = $('<div class="col-md-4">  </div>').append(image);
+            $('#image-preview').append(div);
+          }
+
+          /*reads the contents of a file specified by the file parameter
+          and returns a data URL representing the file's contents.*/
+          reader.readAsDataURL(file);
+        }
+      });
+      /*-------------------------------------------*/
     /*---------------add product with multi sizes-images-colors....*/
 // category and sub category
 $('#sub-category').html('<option value="">Loading...</option>');
@@ -26,7 +52,7 @@ $('#sub-category').html('<option value="">Loading...</option>');
         error: function(xhr, status, error) {
           console.error(error);
         },
-        
+
       });
 
     });
@@ -35,7 +61,7 @@ $('#sub-category').html('<option value="">Loading...</option>');
 
 $('#add_more_size_color').click(function(e){
     var size = $('#attr_1 #size-select').html();
-    var color = $('#attr_1 #size-select').html();
+    var color = $('#attr_1 #color-select').html();
     var offer = $('#attr_1 #offer-select').html();
     console.log(size);
     att_count++;

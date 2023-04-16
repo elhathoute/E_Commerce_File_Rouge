@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Your Products</h5>
-                <a href="{{ route('e-commerce.add_product') }}"><i class="fi-rs-add"></i></a>
+                <a href="{{ route('e-commerce.create_product') }}"><i class="fi-rs-add"></i></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

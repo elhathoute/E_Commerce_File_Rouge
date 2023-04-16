@@ -23,11 +23,11 @@
                 <div class="row">
               <div class="form-group col-md-4">
                 <label for="name">Name of Product:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name of product">
+                <input required type="text" class="form-control" id="name" name="name" placeholder="Enter name of product">
               </div>
               <div class="form-group col-md-4">
                 <label for="description">Description:</label>
-                <input type="text" class="form-control" id="description" name="description" placeholder="Enter description">
+                <input required type="text" class="form-control" id="description" name="description" placeholder="Enter description">
               </div>
               <div class="form-group col-md-4">
                 <label for="type">Type:</label>
@@ -58,7 +58,7 @@
                 <label for="sub-category">Sub Category:</label>
                 <select class="form-control" id="sub-category" name="sub-category">
                   <option selected  disabled >Select a sub-category</option>
-                 
+
                 </select>
               </div>
               @php
@@ -78,19 +78,19 @@
             <div class="row mt-1">
             <div class="form-group col-md-3">
                 <label for="semelle_int">Semelle Intérieure</label>
-                <input type="text" class="form-control" id="semelle_int" name="semelle_int">
+                <input required type="text" class="form-control" id="semelle_int" name="semelle_int">
             </div>
             <div class="form-group col-md-3">
                 <label for="semelle_ext">Semelle Extérieure</label>
-                <input type="text" class="form-control" id="semelle_ext" name="semelle_ext">
+                <input required type="text" class="form-control" id="semelle_ext" name="semelle_ext">
             </div>
             <div class="form-group col-md-3">
                 <label for="tige">Tige</label>
-                <input type="text" class="form-control" id="tige" name="tige">
+                <input required type="text" class="form-control" id="tige" name="tige">
             </div>
             <div class="form-group col-md-3">
                 <label for="doubleure">Doublure</label>
-                <input type="text" class="form-control" id="doubleure" name="doubleure">
+                <input required type="text" class="form-control" id="doubleure" name="doubleure">
             </div>
             </div>
 
@@ -128,11 +128,11 @@
 
                 <div class="col-md-2 form-group">
                   <label for="quantity-input">Quantity:</label>
-                  <input min="0" type="number" class="form-control" id="quantity-input" name="quantity-input[]">
+                  <input required min="0" type="number" class="form-control" id="quantity-input" name="quantity-input[]">
                 </div>
                 <div class="col-md-2 form-group">
                   <label for="price-input">Price:</label>
-                  <input min="0" type="number" class="form-control" id="price-input" name="price-input[]">
+                  <input required min="0" type="number" class="form-control" id="price-input" name="price-input[]">
                 </div>
                 <div class="col-md-2 form-group">
                   <label for="offer-select">Offer:</label>
@@ -146,7 +146,7 @@
                   </select>
                 </div>
                 <div class="col-md-2 form-group mt-4">
-                  <button type="submit" class="btn btn-success text-dark" id="add_more_size_color"> <i class="fi-rs-add"></i></button>
+                  <button type="button" class="btn btn-success text-dark" id="add_more_size_color"> <i class="fi-rs-add"></i></button>
                 </div>
               </div>
 
@@ -155,7 +155,11 @@
 
               <div class="form-group">
                 <label for="images">Images:</label>
-                <input type="file" class="form-control-file" id="images" name="images[]">
+                <input required type="file" class="form-control-file" id="images" name="images[]" multiple>
+              </div>
+              {{-- show images --}}
+              <div id="image-preview" class="d-flex my-2 row flex-wrap align-items-center justify-content-between">
+
               </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary text-center">Add Product</button>
