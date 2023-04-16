@@ -2,7 +2,7 @@ $(document).ready(function() {
     /*------------------show image selected----------*/
     $('#images').on('change', function() {
         // empty div of show images
-        // $('#image-preview').empty();
+        $('#image-preview').empty();
         // get all files
         var files = $(this)[0].files;
     // loop to each file(image)

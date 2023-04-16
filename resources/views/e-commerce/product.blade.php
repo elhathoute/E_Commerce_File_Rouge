@@ -24,32 +24,49 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Order</th>
-                                <th>Date</th>
-                                <th>Qte</th>
-                                <th>Price</th>
-                                <th>Color</th>
-                                <th>Size</th>
-                                <th>Total</th>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>sizes</th>
+                                <th>colors</th>
+                                <th>category</th>
+                                <th>sub_category</th>
+                                <th>brand</th>
+                                <th>image</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($orders as  $order) --}}
+                            @foreach ($products as  $product)
 
                             <tr>
-                                <td>#</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                                <td>#{{ $product->id }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>
+                                   @foreach ($product->sizes as $size )
+                                    {{ $size->size }}/
+                                   @endforeach
+                                </td>
+                                <td>
+                                @foreach ($product->sizes as $size )
+                                @foreach ($size->colors as $color )
+                                {{ $color->name }}/
+                               @endforeach
+                               @endforeach
+                                </td>
+                                <td>{{ $product->category->name }}</td>
+                                <td>{{ $product->sub_category->name }}</td>
+                                <td>{{ $product->brande->name }}</td>
+                                <td class="d-flex justify-content-center">
+
+                                    <img
+                                    style="max-width: 80px;border-radius: 50px"
+                                     src="{{ asset('assets/imageProducts/'.$product->images->first()->image) }}" alt="" srcset="">
+                                </td>
                                 <td>
                                     <a href="#" class="btn-small d-block">View</a>
                                 </td>
                             </tr>
-                            {{-- @endforeach --}}
+                            @endforeach
 
 
                         </tbody>

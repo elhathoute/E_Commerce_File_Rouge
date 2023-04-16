@@ -150,7 +150,7 @@
                                                     <input
                                                     class="me-1 number-of-product"
                                                     style=" max-height: 34px;max-width: 100px;"
-                                                    type="number" name="" id="" min="0" max="{{$color->pivot->quantity}}" value="{{$color->pivot->quantity}}">
+                                                    type="number" name="" id="" min="1" max="{{$color->pivot->quantity}}" value="{{$color->pivot->quantity}}">
                                                 </div>
                                    <div class="d-flex align-items-center">
 
@@ -233,7 +233,7 @@
 
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                             <div class="detail-extralink">
-                              
+
                                 <div class="product-extra-link2">
                                     <button type="submit" class="button button-add-to-cart" id="add-to-panier" >Add to cart</button>
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{{ route('e-commerce.add_to_wishlist',['id'=>$product->id]) }}"><i class="fi-rs-heart"></i></a>

@@ -15,10 +15,16 @@ use App\Models\DetailProduct;
 class ProductController extends Controller
 {
 
+      // index(admin)
+      public function index(){
+        $products = Product::with('sizes', 'reviews', 'images', 'brande', 'category', 'sub_category')
+        ->get();
+        return view('e-commerce.product',['products'=>$products]);
+    }
     // create product
     public function create(){
 
-        // $categories=Category::all();
+
 
         return view('e-commerce.add_product');
     }
@@ -28,44 +34,44 @@ class ProductController extends Controller
 
         // dd($brande);
         // validate data
-        // $Product_Validate=$request->validate(
-        //     [
-        //     'name' => 'required|string',
-        //     'description' => 'required|string',
-        //     'type' => 'required|string',
-        //     'category' => 'required|numeric',
-        //     'sub-category' => 'required|numeric',
-        //     'brand' => 'required|numeric',
-        //     'semelle_int' => 'required|string',
-        //     'semelle_ext' => 'required|string',
-        //     'tige' => 'required|string',
-        //     'doubleure' => 'required|string',
+        $Product_Validate=$request->validate(
+            [
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'type' => 'required|string',
+            'category' => 'required|numeric',
+            'sub-category' => 'required|numeric',
+            'brand' => 'required|numeric',
+            'semelle_int' => 'required|string',
+            'semelle_ext' => 'required|string',
+            'tige' => 'required|string',
+            'doubleure' => 'required|string',
 
-        //     'size-select' => 'required|array',
-        //     'size-select.*' => 'required|string',
-        //     'color-select' => 'required|array',
-        //     'color-select.*' => 'required|string',
-        //     'quantity-input' => 'required|array|size:2',
-        //     'quantity-input.*' => 'required|numeric',
-        //     'price-input' => 'required|array|size:2',
-        //     'price-input.*' => 'required|numeric',
-        //     'offer-select' => 'required|array|size:2',
-        //     'offer-select.*' => 'required|string',
-        //      'images'        =>'image|mimes:jpeg,png,jpg'
+            'size-select' => 'required|array',
+            'size-select.*' => 'required|string',
+            'color-select' => 'required|array',
+            'color-select.*' => 'required|string',
+            // 'quantity-input' => 'required|array|size:2',
+            'quantity-input.*' => 'required|numeric',
+            // 'price-input' => 'required|array|size:2',
+            'price-input.*' => 'required|numeric',
+            // 'offer-select' => 'required|array|size:2',
+            'offer-select.*' => 'required|numeric',
+             'images.*' =>'required|mimes:jpeg,png,jpg'
 
-        //     ]
-        // );
+            ]
+        );
 
         // create new instance
         $product = new Product();
         // simple column
-        $product->name = $request['name'];
-        $product->description = $request['description'];
-        $product->type = $request['type'];
+        $product->name = $Product_Validate['name'];
+        $product->description = $Product_Validate['description'];
+        $product->type = $Product_Validate['type'];
         // get relation ship
-        $category = Category::find($request['category']);
-        $sub_category = SubCategory::find($request['sub-category']);
-        $brande = Brande::find($request['brand']);
+        $category = Category::find($Product_Validate['category']);
+        $sub_category = SubCategory::find($Product_Validate['sub-category']);
+        $brande = Brande::find($Product_Validate['brand']);
         // attach product to each realtionship
         $product->category()->associate($category);
         $product->sub_category()->associate($sub_category);
@@ -75,7 +81,7 @@ class ProductController extends Controller
         $product->save();
 
           // verify images
-          $images = $request['images'];
+          $images = $Product_Validate['images'];
 
           if($request->hasFile('images')){
               foreach($images as $image){
@@ -96,10 +102,10 @@ class ProductController extends Controller
         // save detail_product
         $detail_product = new DetailProduct();
 
-        $detail_product->semelle_int = $request['semelle_int'];
-        $detail_product->semelle_ext = $request['semelle_ext'];
-        $detail_product->doubleure = $request['doubleure'];
-        $detail_product->tige = $request['tige'];
+        $detail_product->semelle_int = $Product_Validate['semelle_int'];
+        $detail_product->semelle_ext = $Product_Validate['semelle_ext'];
+        $detail_product->doubleure = $Product_Validate['doubleure'];
+        $detail_product->tige = $Product_Validate['tige'];
 
         // associate detail product to product
 
@@ -111,18 +117,20 @@ class ProductController extends Controller
         $detail_product->save();
 
         // get sizes
-        $sizes = $request['size-select'];
+        $sizes_unique = array_unique($Product_Validate['size-select']);
+        // dd($sizes);
          // get colors
-         $colors = $request['color-select'];
+         $colors = $Product_Validate['color-select'];
          //get quantities
-         $quantities = $request['quantity-input'];
+         $quantities = $Product_Validate['quantity-input'];
          // get offers
-         $offers = $request['offer-select'];
+         $offers = $Product_Validate['offer-select'];
          // prices
-         $prices = $request['price-input'];
+         $prices = $Product_Validate['price-input'];
          // attach product with sizes
-         $product->sizes()->attach($sizes);
+         $product->sizes()->attach($sizes_unique);
 
+         $sizes = $Product_Validate['size-select'];
 
          foreach ($sizes as $key => $size) {
             // Get the size model
@@ -139,15 +147,14 @@ class ProductController extends Controller
                 'offer' => $offers[$key]
             ]);
         }
-
-        return redirect('/product')->with('success-add-product','product add with success');
+            if(!$product){
+                return back()->with('error-add-product','product not add')->withInput();
+            }else{
+                return redirect('/product')->with('success-add-product','product add with success');
+            }
 
     }
-    // index(admin)
-    public function index(){
 
-        return view('e-commerce.product');
-    }
 
 // view_one_product(user)
     public function view_product($id){
