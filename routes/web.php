@@ -37,7 +37,7 @@ Route::get('/product',[ProductController::class ,'index'])->name('e-commerce.pro
 //view to add product
 Route::get('/product/create',[ProductController::class ,'create'])->name('e-commerce.create_product');
 // shop
-Route::get('/shop/{parametre?}',[ShopController::class,'shop'])->name('e-commerce.shop');
+Route::get('/shop/{parametre?}{sub_category?}',[ShopController::class,'shop'])->name('e-commerce.shop');
 
 // show  paniers
 Route::get('/panier',[PanierController::class ,'panier'])->middleware('auth')->name('e-commerce.panier');

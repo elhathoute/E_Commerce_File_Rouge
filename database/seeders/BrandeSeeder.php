@@ -16,11 +16,11 @@ class BrandeSeeder extends Seeder
     public function run()
     {
         $brandes=[
-            ['name' => 'Nike','product_id'=>1],
-            ['name' => 'Adidas','product_id'=>1],
-            ['name' => 'Puma','product_id'=>1],
-            ['name' => 'Reebok','product_id'=>1],
-            ['name' => 'New Balance','product_id'=>1]
+            ['name' => 'guess','image'=>'guess.jpg'],
+            ['name' => 'Adidas','image'=>'adidas.jpg'],
+            ['name' => 'Puma','image'=>'puma.jpg'],
+            ['name' => 'Reebok' ,'image'=>'reebok.jpg'],
+
         ];
         for($i=0;$i<=4;$i++){
             Brande::create($brandes[$i]);

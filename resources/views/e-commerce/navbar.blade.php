@@ -135,7 +135,7 @@
 
 
                                                         </a>
-                                                        <span> <a href="{{ route('e-commerce.shop',['parametre'=>$subcategory->name]) }}">{{ $subcategory->name }}</a> </span>
+                                                        <span> <a href="{{ route('e-commerce.shop',['category'=>$category->name,'sub_category'=>$subcategory->name]) }}">{{ $subcategory->name }}</a> </span>
 
                                                     </li>
                                                 @endforeach

@@ -22,9 +22,11 @@
     ->where('categories.name', '=', 'children')
     ->with('images','sizes')
     ->get();
-
+// get all subCategories
+$subCategories=App\Models\SubCategory::all();
 
     @endphp
+
 
 {{-- section main --}}
     <section class="home-slider position-relative pt-50">
@@ -112,37 +114,22 @@
     <section class="featured section-padding position-relative">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="col-md-4 mb-1">
                     <div class="banner-features wow fadeIn animated hover-up">
                         <img src="assets/imgs/theme/icons/feature-1.png" alt="">
                         <h4 class="bg-1">Free Shipping</h4>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="col-md-4 mb-1">
                     <div class="banner-features wow fadeIn animated hover-up">
                         <img src="assets/imgs/theme/icons/feature-2.png" alt="">
                         <h4 class="bg-3">Online Order</h4>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="assets/imgs/theme/icons/feature-3.png" alt="">
-                        <h4 class="bg-2">Save Money</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="assets/imgs/theme/icons/feature-4.png" alt="">
-                        <h4 class="bg-4">Promotions</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
-                    <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="assets/imgs/theme/icons/feature-5.png" alt="">
-                        <h4 class="bg-5">Happy Sell</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+              
+             
+             
+                <div class="col-md-4 mb-1">
                     <div class="banner-features wow fadeIn animated hover-up">
                         <img src="assets/imgs/theme/icons/feature-6.png" alt="">
                         <h4 class="bg-6">24/7 Support</h4>
@@ -434,58 +421,21 @@
 
     <section class="popular-categories section-padding mt-15 mb-25">
         <div class="container wow fadeIn animated">
-            <h3 class="section-title mb-20"><span>Popular</span> Categories</h3>
+            <h3 class="section-title mb-20"><span>Popular</span> SubCategories</h3>
             <div class="carausel-6-columns-cover position-relative">
                 <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
                 <div class="carausel-6-columns" id="carausel-6-columns">
+                    @foreach ($subCategories as $subCategory )
+
                     <div class="card-1">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-1.jpg" alt=""></a>
+                            <a href="{{ route('e-commerce.shop',['parametre'=>$subCategory->name]) }}"><img src="{{ asset('assets/imageSubCategory/'.$subCategory->image) }}" alt=""></a>
                         </figure>
-                        <h5><a href="shop.html">T-Shirt</a></h5>
+                        <h5><a href="{{ route('e-commerce.shop',['parametre'=>$subCategory->name]) }}">{{ $subCategory->name}}</a></h5>
                     </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"> <img src="assets/imgs/shop/category-thumb-2.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Bags</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-3.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Sandan</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-4.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Scarf Cap</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-5.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Shoes</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-6.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Pillowcase</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-7.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Jumpsuits</a></h5>
-                    </div>
-                    <div class="card-1">
-                        <figure class=" img-hover-scale overflow-hidden">
-                            <a href="shop.html"><img src="assets/imgs/shop/category-thumb-8.jpg" alt=""></a>
-                        </figure>
-                        <h5><a href="shop.html">Hats</a></h5>
-                    </div>
+                    @endforeach
+
+
                 </div>
             </div>
         </div>
@@ -495,31 +445,31 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="banner-img wow fadeIn animated">
-                        <img src="assets/imgs/banner/banner-1.png" alt="">
+                        <img class="mb-4 rounded" src="{{  asset('assets/imgs/banner/menu-banner-8.png')  }}" alt="">
                         <div class="banner-text">
-                            <span>Smart Offer</span>
-                            <h4>Save 20% on <br>Woman Bag</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            {{-- <span>Smart Offer</span>
+                            <h4>Save 20% on <br>Woman Bag</h4> --}}
+                            <a href="{{ route('e-commerce.shop') }}">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="banner-img wow fadeIn animated">
-                        <img src="assets/imgs/banner/banner-2.png" alt="">
+                        <img class="mb-4 rounded" src="{{ asset('assets/imgs/banner/menu-banner-2.jpg') }}" alt="">
                         <div class="banner-text">
-                            <span>Sale off</span>
-                            <h4>Great Summer <br>Collection</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            {{-- <span>Sale off</span>
+                            <h4>Great Summer <br>Collection</h4> --}}
+                            <a href="{{ route('e-commerce.shop') }}">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 d-md-none d-lg-flex">
                     <div class="banner-img wow fadeIn animated  mb-sm-0">
-                        <img src="assets/imgs/banner/banner-3.png" alt="">
+                        <img class="mb-4 rounded" src="{{ asset('assets/imgs/banner/menu-banner-6.jpg') }}" alt="">
                         <div class="banner-text">
-                            <span>New Arrivals</span>
-                            <h4>Shop Today’s <br>Deals & Offers</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            {{-- <span>New Arrivals</span>
+                            <h4>Shop Today’s <br>Deals & Offers</h4> --}}
+                            <a href="{{ route('e-commerce.shop') }}">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -540,7 +490,7 @@
                     @foreach ($brandes as $brande )
 
                     <div class="brand-logo">
-                        <img class="img-grey-hover" src="{{ asset('assets/imageBrande/'.$brande->image) }}" alt="brande">
+                        <img class="img-grey-hover p-2" src="{{ asset('assets/imageBrande/'.$brande->image) }}" alt="brande">
                     </div>
                     @endforeach
 

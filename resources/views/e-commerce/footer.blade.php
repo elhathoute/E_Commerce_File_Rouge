@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="widget-about font-md mb-md-5 mb-lg-0">
                         <div class="logo logo-width-1 wow fadeIn animated">
-                            <a href="index.html"><img src="assets/imgs/logo/logo_my_shoes.jpg" alt="logo"></a>
+                            <a href="{{ route('e-commerce.home') }}"><img src="{{ asset('assets/imgs/logo/logo_my_shoes.jpg') }}" alt="logo"></a>
                         </div>
                         <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
                         <p class="wow fadeIn animated">
@@ -35,7 +35,7 @@
                 <div class="col-lg-2  col-md-3">
                     <h5 class="widget-title wow fadeIn animated">My Account</h5>
                     <ul class="footer-list wow fadeIn animated">
-                        <li><a href="my-account.html">My Account</a></li>
+                        <li><a href="{{ route('e-commerce.user.profile') }}">My Account</a></li>
                         <li><a href="#">View Cart</a></li>
                         <li><a href="#">My Wishlist</a></li>
                         <li><a href="#">Order</a></li>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-lg-6">
                 <p class="float-md-left font-sm text-muted mb-0">
-                    <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms & Conditions</a>
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
                 </p>
             </div>
             <div class="col-lg-6">

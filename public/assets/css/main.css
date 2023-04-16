@@ -3000,7 +3000,13 @@ table .product-thumbnail img {
 
 .banner-img .banner-text {
   position: absolute;
-  top: 50%;
+  left: 38%;
+  background-color: white;
+  top: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-weight: bold;
+  color: red;
   z-index: 2;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -3182,8 +3188,9 @@ table .product-thumbnail img {
 .banner-features {
   text-align: center;
   padding: 25px 15px;
-  border-radius: 4px;
-  border: 1px solid #cce7d0;
+  background-color: #fce93c30;
+  border-radius: 50px;
+  border: 1px solid #03fa28;
   -webkit-box-shadow: 20px 20px 54px rgba(0, 0, 0, 0.03);
           box-shadow: 20px 20px 54px rgba(0, 0, 0, 0.03);
 }
