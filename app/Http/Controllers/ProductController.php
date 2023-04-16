@@ -8,12 +8,17 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
     // create product
     public function create(){
 
         // $categories=Category::all();
 
         return view('e-commerce.add_product');
+    }
+    // add product
+    public function store(Request $request){
+        dd($request);
     }
     // index(admin)
     public function index(){

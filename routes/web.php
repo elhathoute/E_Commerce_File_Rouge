@@ -24,6 +24,8 @@ use App\Models\SubCategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// get subcategories for each category in db with ajax
+Route::get('/getSubCategory',[CategoryController::class,'get_sub_category']);
 // paiment create
 Route::get('/paiment/create/{id}',[PaimentController::class ,'create'])->middleware('auth')->name('e-commerce.paiment');
 // paiment store (change from panier->order)
@@ -36,6 +38,10 @@ Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');
 Route::get('/product',[ProductController::class ,'index'])->name('e-commerce.product');
 //view to add product
 Route::get('/product/create',[ProductController::class ,'create'])->name('e-commerce.create_product');
+
+//add product to db
+Route::post('/product/store',[ProductController::class ,'store'])->name('e-commerce.add_product');
+
 // shop
 Route::get('/shop/{parametre?}{sub_category?}',[ShopController::class,'shop'])->name('e-commerce.shop');
 

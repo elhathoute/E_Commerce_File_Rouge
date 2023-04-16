@@ -9,6 +9,16 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
+    // get sub_category for each category
+    public function get_sub_category(Request $request){
+        if($request->query('category')){
+
+            $category = Category::where('id','=',$request->category)->with('subCategories')->first();
+
+            $subCategories = $category->subCategories->pluck('name', 'id'); // Get subcategories' names and IDs
+            return response()->json($subCategories); // Return a JSON respons
+        }
+    }
     public function index(){
 
         return view('e-commerce.category');

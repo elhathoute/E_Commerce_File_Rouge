@@ -1,4 +1,94 @@
 $(document).ready(function() {
+    /*---------------add product with multi sizes-images-colors....*/
+// category and sub category
+$('#sub-category').html('<option value="">Loading...</option>');
+
+    $('#category').on('change',function(e){
+       var category = $(this).val();
+
+       $.ajax({
+        url: '/getSubCategory',
+        method: 'GET',
+        data: {
+          category: category
+        },
+        success: function(response) {
+          console.log(response);
+          var subCategories = response;
+          var options = '';
+          options+='<option disabled selected>select sub category</option>';
+          $.each(subCategories, function(id, name) {
+              options += '<option value="' + id + '">' + name + '</option>';
+          });
+          $('#sub-category').html(options);
+
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        },
+        
+      });
+
+    });
+    //add new div color size
+   var att_count=1;
+
+$('#add_more_size_color').click(function(e){
+    var size = $('#attr_1 #size-select').html();
+    var color = $('#attr_1 #size-select').html();
+    var offer = $('#attr_1 #offer-select').html();
+    console.log(size);
+    att_count++;
+   var div_product_size_color = $('#div-product-size-color');
+    var html_add_product_size =`
+    <div class="row mt-2" id="att_${att_count}'">
+    <div class="col-md-2 form-group">
+    <label for="size-select">Size:</label>
+    <select class="form-control" id="size-select-${att_count}" name="size-select[]">
+
+    </select>
+    </div>
+    <div class="col-md-2 form-group">
+    <label for="color-select">Color:</label>
+    <select class="form-control" id="color-select-${att_count}" name="color-select[]">
+
+    </select>
+    </div>
+    <div class="col-md-2 form-group">
+    <label for="quantity-input">Quantity:</label>
+    <input min="0" type="number" class="form-control" id="quantity-input-${att_count}" name="quantity-input[]">
+    </div>
+    <div class="col-md-2 form-group">
+    <label for="price-input">Price:</label>
+    <input min="0" type="number" class="form-control" id="price-input-${att_count}" name="price-input[]">
+    </div>
+    <div class="col-md-2 form-group">
+    <label for="offer-select">Offer:</label>
+    <select class="form-control" id="offer-select-${att_count}" name="offer-select[]">
+
+    </select>
+    </div>
+    <div class="col-md-2 form-group mt-4">
+    <button type="button" class="btn btn-danger text-dark" id="remove_more_size_color_${att_count}" > <i class="fi-rs-trash"></i></button>
+    </div>
+    </div>
+    `;
+   div_product_size_color.append(html_add_product_size);
+   $('#size-select-'+att_count).html(size);
+   $('#color-select-'+att_count).html(color);
+   $('#offer-select-'+att_count).html(offer);
+
+// remove btn size color
+
+    $("#remove_more_size_color_"+att_count).click(function(e) {
+        alert(att_count)
+  $(this).closest('.row').remove();
+});
+});
+
+
+
+    /*-------------------------------------------------------*/
     /*------------validation form paiment----------------*/
 
         $('#form-paiment').submit(function(event) {
