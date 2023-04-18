@@ -21,6 +21,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+          {{-- alert error --}}
+       @if ($errors->any())
+       <div class="alert-danger text-center mb-2">
+         {{ $errors->first() }}
+       </div>
+        </div>
+        @endif
+
+        <div class="col-md-12">
             <div class="product-detail accordion-detail">
                 <div class="row mb-50">
                     <div class="col-md-6 col-sm-12 col-xs-12">
@@ -56,6 +65,7 @@
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails pl-15 pr-15">
+                                {{-- {{ dd($product->images) }} --}}
                                 @foreach ($product->images as $image )
 
                                 <div>
@@ -326,8 +336,27 @@
                                             </div>
                                             @endforeach
 
-                                            <!--single-comment -->
                                         </div>
+                                    </div>
+                                 <!--add your-comment -->
+                                    <div class="col-md-12">
+                                        <form action="{{ route('e-commerce.add_review') }}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-2">
+                                                <input class="form-control" type="number" value="{{ $product->id }}" hidden name="id_product" id="id_product" >
+                                                <label for="review" class="form-label">Add Your Review</label>
+                                                <textarea style="border:1px solid black !important;" class="form-control border @error('review') is-invalid @enderror" required id="review" name="review" rows="3"></textarea>
+                                                <div class="invalid-feedback">
+                                                    @error('review')
+                                                    {{ $message }}
+                                                    @enderror
+                                                  </div>
+                                            </div>
+                                              <div class="mb-2">
+                                            <button type="submit" class="btn btn-success">Add Review</button>
+
+                                              </div>
+                                        </form>
                                     </div>
 
                                 </div>

@@ -107,7 +107,7 @@ $('#add_more_size_color').click(function(e){
 // remove btn size color
 
     $("#remove_more_size_color_"+att_count).click(function(e) {
-        alert(att_count)
+
   $(this).closest('.row').remove();
 });
 });

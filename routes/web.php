@@ -10,6 +10,7 @@ use App\Http\Controllers\LinkedinSocialiteController;
 use App\Http\Controllers\PaimentController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\SubCategory;
@@ -24,6 +25,10 @@ use App\Models\SubCategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*add review*/
+Route::POST('/add_review',[ReviewController::class,'add_review'])->middleware('auth')->name('e-commerce.add_review');
+
 // get subcategories for each category in db with ajax
 Route::get('/getSubCategory',[CategoryController::class,'get_sub_category']);
 // paiment create
@@ -37,7 +42,11 @@ Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');
 // product
 Route::get('/product',[ProductController::class ,'index'])->name('e-commerce.product');
 //view to add product
-Route::get('/product/create',[ProductController::class ,'create'])->name('e-commerce.create_product');
+Route::get('/product/create',[ProductController::class ,'create'])->middleware('auth')->name('e-commerce.create_product');
+// view to update product
+Route::get('/product/edit/{id}',[ProductController::class ,'edit'])->middleware('auth')->name('e-commerce.edit_product');
+// update PRODUCT
+ Route::PATCH('/product/update/{id}',[ProductController::class ,'update'])->middleware('auth')->name('e-commerce.update_product');
 
 //add product to db
 Route::post('/product/store',[ProductController::class ,'store'])->name('e-commerce.add_product');

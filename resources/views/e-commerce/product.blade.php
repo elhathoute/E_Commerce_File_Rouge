@@ -43,14 +43,58 @@
                                 <td>{{ $product->name }}</td>
                                 <td>
                                    @foreach ($product->sizes as $size )
-                                    {{ $size->size }}/
+                                   <div class="relative">
+                                    <svg width="40px" height="40px" viewBox="-8.64 -8.64 41.28 41.28" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="Circle"> <circle cx="12" cy="12" data-name="Circle" fill="none" id="Circle-2" r="10" stroke="#908e8e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle> </g> </g> </g></svg>
+
+                                    <span
+                                   style=" position: absolute;
+                                   top: 10px;
+                                   left: 12px;
+                                   font-weight: bold;"
+                                    >  {{ $size->size }}</span>
+                                   </div>
+
                                    @endforeach
                                 </td>
-                                <td>
-                                @foreach ($product->sizes as $size )
-                                @foreach ($size->colors as $color )
-                                {{ $color->name }}/
-                               @endforeach
+                                @php
+                                    $colors= DB::table('color_size')
+                                    ->select(DB::raw('DISTINCT colors.name ,SUM(quantity) as totalQuantity'))
+                                    ->join('colors','color_size.color_id','=','colors.id')
+                                    ->where('product_id','=',$product->id)
+                                    ->groupBy('color_id','colors.name')
+                                    // ->distinct()
+                                    ->get();
+                                @endphp
+                                <td >
+
+
+                                @foreach ($colors as $color )
+                                <ul class="list-filter color-filter position-relative d-flex justify-content-center">
+
+
+                                    <li
+
+                                    class="active"><a class="bg-light" href="#" >
+                                        <span class="product-color-{{ $color->name }}"></span></a></li>
+                                    <li
+                                    style="
+                                     position: absolute;
+                                    left: 3px;
+                                    color: darkblue;
+                                    top: 7px;
+                                    font-size: 11px;
+                                    >
+                                    <span class="fw-bold">
+                                    @if($color->totalQuantity<10)
+                                    00{{ $color->totalQuantity }}
+                                    @else
+                                    {{ $color->totalQuantity }}
+                                    @endif
+                                </span></li>
+
+                                </ul>
+
+
                                @endforeach
                                 </td>
                                 <td>{{ $product->category->name }}</td>
@@ -63,7 +107,9 @@
                                      src="{{ asset('assets/imageProducts/'.$product->images->first()->image) }}" alt="" srcset="">
                                 </td>
                                 <td>
-                                    <a href="#" class="btn-small d-block">View</a>
+                                    <a href="{{ route('e-commerce.edit_product',['id'=>$product->id]) }}" class="btn-small d-block">
+                                        <i class="fi-rs-edit"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
