@@ -85,7 +85,7 @@
               <div class="form-group col-md-4">
                 <label for="sub-category">Sub Category:</label>
                 <select class="form-control @error('sub-category') is-invalid @enderror " id="sub-category" name="sub-category">
-                  <option selected  disabled >Select a sub-category</option>
+                  <option selected  value="{{ $product->sub_category->id }}" >{{ $product->sub_category->name }}</option>
                 </select>
                 <div class="invalid-feedback">
                     @error('sub-category')
@@ -296,26 +296,9 @@
                   </div>
                 </div>
 
-                <div class="col-md-2 form-group mt-4">
+                <div class="col-md-2 form-group mt-4 d-flex flex-column justify-content-evenly">
                     <button type="button" class="btn btn-success text-dark mt-1" id="add_more_size_color"> <i class="fi-rs-add"></i></button>
-            {{-- @php
-                $show = 0;
-            @endphp
-                @foreach ($product->sizes as $key=>$size )
-
-                    @foreach ($size->colors as $index=>$color )
-                    @php
-                        $show++;
-                    @endphp
-                    @endforeach
-                    @endforeach --}}
-                    {{-- btn of remove item --}}
-                    {{-- @for($i = 1; $i < $show; $i++)
-                    <button type="button" class="btn btn-success text-dark mt-1" id="remove_more_size_color_edit_{{ $i }}"> <i class="fi-rs-trash"></i></button>
-                    @endfor --}}
-
-
-
+                    <span class="text-danger">* Please if you need to add new size with color don't touch existing sizes</span>
                 </div>
               </div>
 

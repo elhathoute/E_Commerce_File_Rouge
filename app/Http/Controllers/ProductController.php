@@ -115,6 +115,7 @@ class ProductController extends Controller
         $sizeModel = Size::find($size);
         // get color model
         $colorModel = Color::find($colors[$key]);
+        // dd($colorModel);
            // sync the color with this size, and set the quantity, price, and offer
     $sizeModel->colors()->wherePivot('product_id', $product->id)->sync([
         $colorModel->id => [

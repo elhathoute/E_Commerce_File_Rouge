@@ -125,7 +125,9 @@
                                 <span class="badge bg-danger text-white ">
                                     {{ $product->type }}
                                 </span>
+
                             </div>
+                            <p  class="text-danger  fw-bold my-2 ">* please select quantity before checkbox ! </p>
 
                             <div class="attr-detail attr-size mb-15">
                                 {{-- <strong class="mr-10">Size</strong> --}}
@@ -209,18 +211,30 @@
 
                                 </ul>
                             </div>
+
+
+
                             <div class="attr-detail attr-color ">
 
                                 <strong class="mr-10">#Color</strong>
                                 <ul class="list-filter color-filter">
+                                    @php
+                                     $colors= DB::table('color_size')
+                                    ->select(DB::raw('DISTINCT colors.name ,SUM(quantity) as totalQuantity'))
+                                    ->join('colors','color_size.color_id','=','colors.id')
+                                    ->where('product_id','=',$product->id)
+                                    ->groupBy('color_id','colors.name')
+                                    ->get();
+                                    @endphp
 
-                                    @foreach ($product->sizes as $index=>$size )
-                                    @foreach ($size->colors->where('pivot.product_id', $product->id) as $color)
+                                    @foreach ($colors as $color)
+                                    {{-- @foreach ($size->colors->where('pivot.product_id', $product->id) as $color) --}}
                                     <li
                                     class="no-active"><a href="#" data-color="{{ $color->name }}"><span class="product-color-{{ $color->name }}"></span></a>
+                                    {{-- <span class="fw-bold">{{ $color->totalQuantity }}</span> --}}
                                 </li>
 
-                                    @endforeach
+                                    {{-- @endforeach --}}
                                     @endforeach
                                 </ul>
 
@@ -244,8 +258,13 @@
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                             <div class="detail-extralink">
 
-                                <div class="product-extra-link2">
+                                <div class="product-extra-link2 d-flex align-items-center">
+                                    @if($totalQte!==0)
                                     <button type="submit" class="button button-add-to-cart" id="add-to-panier" >Add to cart</button>
+                                    @else
+                                    <span class="my-3 fw-bold">Sorry this Product has no Quantity in stock !  </span>
+                                    <a href="{{ route('e-commerce.shop') }}" >More</a>
+                                    @endif
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="{{ route('e-commerce.add_to_wishlist',['id'=>$product->id]) }}"><i class="fi-rs-heart"></i></a>
 
                                 </div>
@@ -258,8 +277,8 @@
                             <ul class="product-meta font-xs color-grey mt-50">
 
                                 <li class="mb-5">Tags:
-                                    <a href="#" rel="tag">{{ $product->category->name }}</a>,
-                                    <a href="#" rel="tag">{{ $product->sub_category->name }}</a>
+                                    <a href="{{ route('e-commerce.shop',['parametre'=>$product->category->name]) }}" rel="tag">{{ $product->category->name }}</a>,
+                                    <a href="{{ route('e-commerce.shop',['sub_category'=>$product->sub_category->name]) }} }}" rel="tag">{{ $product->sub_category->name }}</a>
                                       </li>
 
                                 <li>Availability:<span class="in-stock text-success ml-5">{{$totalQte  }} Items In Stock</span></li>
@@ -290,13 +309,35 @@
                             </div>
                             <hr>
                             <div class="more-detail">
-                                <ul class="product-more-infor mt-30 fw-bold">
-                                    <li><span >Semelle Int :</span> {{ $product->detail_product->semelle_int }}</li>
-                                    <li><span>Semelle Ext :</span> {{ $product->detail_product->semelle_ext }}</li>
-                                    <li><span>Tige :</span> {{ $product->detail_product->tige }}</li>
-                                    <li><span>Doubleure :</span> {{ $product->detail_product->doubleure }}</li>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <ul class="product-more-infor mt-30 fw-bold">
+                                            <li><span >Semelle Int :</span> {{ $product->detail_product->semelle_int }}</li>
+                                            <li><span>Semelle Ext :</span> {{ $product->detail_product->semelle_ext }}</li>
+                                            <li><span>Tige :</span> {{ $product->detail_product->tige }}</li>
+                                            <li><span>Doubleure :</span> {{ $product->detail_product->doubleure }}</li>
 
-                                </ul>
+                                        </ul>
+
+                                    </div>
+                                    {{-- <div class="col-md-1">
+                                        <h3 class="fw-bold text-secondary fs-4">  <span class="ms-2">Similar</span> products</h3>
+
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <div class="additional-images d-flex align-items-center justify-content-between">
+                                            @foreach ($product->images as $image )
+                                            <div class="pt-3 me-1">
+                                                <a href="">
+                                                <img style="max-height: 200px" src="{{ asset('assets/imageProducts/'.$image->image) }}" alt="">
+                                            </a>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                    </div> --}}
+                                </div>
+
 
 
                             </div>

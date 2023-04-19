@@ -42,6 +42,7 @@
                                 <td>#{{ $product->id }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>
+                                    <div class="d-flex">
                                    @foreach ($product->sizes as $size )
                                    <div class="relative">
                                     <svg width="40px" height="40px" viewBox="-8.64 -8.64 41.28 41.28" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="Circle"> <circle cx="12" cy="12" data-name="Circle" fill="none" id="Circle-2" r="10" stroke="#908e8e" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle> </g> </g> </g></svg>
@@ -55,6 +56,7 @@
                                    </div>
 
                                    @endforeach
+                                </div>
                                 </td>
                                 @php
                                     $colors= DB::table('color_size')
@@ -62,12 +64,10 @@
                                     ->join('colors','color_size.color_id','=','colors.id')
                                     ->where('product_id','=',$product->id)
                                     ->groupBy('color_id','colors.name')
-                                    // ->distinct()
                                     ->get();
                                 @endphp
                                 <td >
-
-
+<div class="d-flex">
                                 @foreach ($colors as $color )
                                 <ul class="list-filter color-filter position-relative d-flex justify-content-center">
 
@@ -87,22 +87,24 @@
                                     <span class="fw-bold">
                                     @if($color->totalQuantity<10)
                                     00{{ $color->totalQuantity }}
+                                    @elseif($color->totalQuantity>=10 && $color->totalQuantity<100)
+                                    0{{ $color->totalQuantity }}
                                     @else
                                     {{ $color->totalQuantity }}
+
                                     @endif
                                 </span></li>
 
                                 </ul>
-
-
                                @endforeach
+                            </div>
                                 </td>
                                 <td>{{ $product->category->name }}</td>
                                 <td>{{ $product->sub_category->name }}</td>
                                 <td>{{ $product->brande->name }}</td>
                                 <td class="d-flex justify-content-center">
 
-                                    <img
+                                    <img class="rotate-img-product"
                                     style="max-width: 80px;border-radius: 50px"
                                      src="{{ asset('assets/imageProducts/'.$product->images->first()->image) }}" alt="" srcset="">
                                 </td>

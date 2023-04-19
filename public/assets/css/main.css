@@ -4468,8 +4468,8 @@ table .product-thumbnail img {
 
 .detail-info .product-price-cover {
   border-top: 1px solid #e2e9e1;
-  border-bottom: 1px solid #e2e9e1;
-  padding: 15px 0;
+  /* border-bottom: 1px solid #e2e9e1; */
+  padding: 3px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -1,4 +1,11 @@
 $(document).ready(function() {
+
+    /*---------rotate img product in table of show product---*/
+
+    setTimeout(function() {
+        $(".rotate-img-product").css('transform', 'rotate(360deg)');
+      }, 1000);
+
     /*------------------show image selected----------*/
     $('#images').on('change', function() {
         // empty div of show images
@@ -27,7 +34,7 @@ $(document).ready(function() {
       /*-------------------------------------------*/
     /*---------------add product with multi sizes-images-colors....*/
 // category and sub category
-$('#sub-category').html('<option value="">Loading...</option>');
+// $('#sub-category').html('<option value="">Loading...</option>');
 
     $('#category').on('change',function(e){
        var category = $(this).val();
@@ -241,6 +248,7 @@ $('.product-img').slick({
         nextArrow: '<span class="slider-btn slider-next" style=" position: absolute !important;top: 0 !important;left: 90% !important; color: red;font-size: 14px; font-weight: bold;"><i class="fi-rs-angle-right"></i></span>',
         autoplay: true,
   });
+  
 
     // "use strict";
     // // Page loading
