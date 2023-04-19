@@ -10,7 +10,12 @@
 /*ABdelaziz*/
 body{
     background-color:#f5f5f5;
-
+}
+footer,header{
+    background-color: white !important;
+}
+.pt-51{
+    padding-top: 51px !important;
 }
 /*------load image of product in add */
 #image-preview img{
@@ -5491,7 +5496,7 @@ h6.post-title {
 }
 
 .cart-dropdown-wrap ul li {
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
     border-radius: 5px;
   display: flex;
   flex-wrap: wrap;

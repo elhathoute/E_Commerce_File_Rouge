@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             @php
-                         $subcategories=App\Models\SubCategory::orderBy('id', 'desc')->get();
+                         $subcategories=App\Models\SubCategory::orderBy('id', 'desc')->paginate(4);
 
                         @endphp
                             <tbody>
@@ -78,16 +78,19 @@
 
                                 </tr>
                                 @endforeach
-
-
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="pagination d-flex align-items-center justify-content-center">
+                        {{ $subcategories->links() }}
                     </div>
                 </div>
             </div>
         </div>
         {{-- add --}}
-        <div class="col-md-5 mb-2  m-auto">
+        <div class="col-md-5 mb-2  my-4">
             <form  id="form-add-subcategory" method="post" action="{{ route('e-commerce.add_subcategory') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">

@@ -222,6 +222,51 @@ $('#add-to-panier').click(function(e){
 })
 
         /*--------------------------------------------------*/
+        /*---------------------calculate price in panier-------------*/
+        //    loop for all li of ul of panier
+
+        let Total=0;
+        console.log(Total);
+        $('#order-panier').on('click',function(e){
+
+            $('.panier li').each(function(index) {
+
+             if( $(`#check-panier-${index}`).prop('checked')){
+
+             var total_unique_price = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
+             console.log(total_unique_price);
+            console.log(Total);
+             Total+=total_unique_price;
+             console.log(Total);
+
+            }
+            });
+
+
+        });
+
+
+           $('.panier li').each(function(index) {
+
+            $(`#quantity-panier-${index}`).on('change',function(e){
+                var total_unique_price = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
+                console.log(total_unique_price);
+
+
+                let total_unique_price_input = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
+                $(`#total-unique-${index}`).text(`${total_unique_price_input}`)
+
+
+
+            })
+
+       
+
+
+          });
+
+
+        /*-----------------------------*/
 /*-----------------drop panier li ----------*/
     $('.icon-delete-panier').click(function(e){
         $(this).closest('li').remove();
@@ -248,7 +293,7 @@ $('.product-img').slick({
         nextArrow: '<span class="slider-btn slider-next" style=" position: absolute !important;top: 0 !important;left: 90% !important; color: red;font-size: 14px; font-weight: bold;"><i class="fi-rs-angle-right"></i></span>',
         autoplay: true,
   });
-  
+
 
     // "use strict";
     // // Page loading

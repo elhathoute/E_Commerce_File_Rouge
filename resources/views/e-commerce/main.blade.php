@@ -37,7 +37,7 @@ $subCategories=App\Models\SubCategory::all();
                     <div class="row align-items-center slider-animated-1">
                         <div class="col-lg-5 col-md-6">
                             <div class="hero-slider-content-2">
-                                <h2 class="animated fw-900">Nouveautés</h2>
+                                <h2 class="animated fw-900">New</h2>
                                 <a class="animated btn btn-brush btn-brush-2" href="{{ route('e-commerce.shop') }}"> Discover Now </a>
                             </div>
                         </div>
@@ -59,8 +59,8 @@ $subCategories=App\Models\SubCategory::all();
                     <div class="row align-items-center slider-animated-1">
                         <div class="col-lg-5 col-md-6">
                             <div class="hero-slider-content-2">
-                                <h2 class="animated fw-900">Homme</h2>
-                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop') }}"> Shop Now </a>
+                                <h2 class="animated fw-900">Men</h2>
+                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop',['parametre'=>'men']) }}"> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -78,7 +78,7 @@ $subCategories=App\Models\SubCategory::all();
                         <div class="col-lg-5 col-md-6">
                             <div class="hero-slider-content-2">
                                 <h2 class="animated fw-900">Women</h2>
-                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop') }}"> Shop Now </a>
+                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop',['parametre'=>'women']) }}"> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -96,7 +96,7 @@ $subCategories=App\Models\SubCategory::all();
                         <div class="col-lg-5 col-md-6">
                             <div class="hero-slider-content-2">
                                 <h2 class="animated fw-900">Children</h2>
-                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop') }}"> Shop Now </a>
+                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('e-commerce.shop',['parametre'=>'children']) }}"> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -126,9 +126,9 @@ $subCategories=App\Models\SubCategory::all();
                         <h4 class="bg-3">Online Order</h4>
                     </div>
                 </div>
-              
-             
-             
+
+
+
                 <div class="col-md-4 mb-1">
                     <div class="banner-features wow fadeIn animated hover-up">
                         <img src="assets/imgs/theme/icons/feature-6.png" alt="">

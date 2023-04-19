@@ -15,6 +15,7 @@ class PanierController extends Controller
             foreach($paniers as $panier){
                 $panier_db=new Panier();
 
+                $panier_db->numero=time();
                 $panier_db->date=Carbon::now();
                 $panier_db->quantity=$panier['quantity'];
                 $panier_db->color_id=$panier['color_id'];
@@ -65,6 +66,7 @@ class PanierController extends Controller
 
         $panier=new Panier();
 
+        $panier->numero=time();
         $panier->date=Carbon::now();
         $panier->quantity=$product->sizes->first()->colors->where('pivot.product_id',$id)
         ->where('pivot.quantity','>','0')
@@ -93,6 +95,7 @@ class PanierController extends Controller
 
         $panier=new Panier();
         // dd($product->sizes->first()->colors->where('pivot.product_id',$id)->first()->pivot->size_id);
+        $panier->numero=time();
         $panier->date=Carbon::now();
         $panier->quantity=$product->sizes->first()->colors->where('pivot.product_id',$id)
         // ->where('pivot.quantity','>','0')

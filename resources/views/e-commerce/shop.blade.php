@@ -16,7 +16,7 @@
             <div class="col-lg-9">
                 <div class="shop-product-fillter">
                     <div class="totall-product">
-                        <p> We found <strong class="text-brand">{{ count($products) }}</strong> items for you!</p>
+                        <p> We found <strong class="text-brand">{{ count($products) }}</strong> products for you!</p>
                     </div>
 
                 </div>
@@ -81,15 +81,10 @@
 
                                 <div class="rating-result" title="90%">
                                     <span>
-                                        {{-- <span>{{ $product->offer }}%</span> --}}
+
                                     </span>
                                 </div>
-                                {{-- <div class="product-price">
-                                    <span>
-                                        {{ ($product->price)-($product->price*$product->offer/(100)) }}DH
-                                    </span>
-                                    <span class="old-price">{{ $product->price }}DH</span>
-                                </div> --}}
+
                                 <div class="product-action-1 show">
                                     <a aria-label="Add To Cart" class="action-btn hover-up" href="{{ route('e-commerce.add_to_panier',['id'=>$product->id]) }}"><i class="fi-rs-shopping-bag-add"></i></a>
                                 </div>
@@ -98,20 +93,20 @@
 
                     </div>
                     @endforeach
-                    <div class="pagination">
+                    <div class="pagination d-flex align-items-center justify-content-center">
                         {{ $products->links() }}
                     </div>
 
                 </div>
 
             </div>
-            <div class="col-lg-3 primary-sidebar sticky-sidebar">
+            <div class="col-lg-3 primary-sidebar sticky-sidebar pt-51">
                 <div class="row">
                     <div class="col-lg-12 col-mg-6"></div>
                     <div class="col-lg-12 col-mg-6"></div>
                 </div>
-                <div class="widget-category mb-30">
-                    <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                <div class="widget-category mb-30 bg-white rounded ">
+                    <h5 class="section-title style-1 mb-30 wow fadeIn animated">Filtre By Category</h5>
 
 
                     <ul class="categories">
