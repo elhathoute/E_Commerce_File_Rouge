@@ -95,10 +95,10 @@
                                                             <td>#{{ $order->id }}</td>
                                                             <td>{{ $order->date }}</td>
                                                             <td>{{ $order->quantity }}</td>
-                                                            <td>{{ $order->price }}</td>
+                                                            <td>{{ $order->price }}DH</td>
                                                             <td>{{ $order->color->name }}</td>
                                                             <td>{{ $order->size->size }}</td>
-                                                            <td>{{ $order->total }}</td>
+                                                            <td>{{ $order->total }}DH</td>
                                                             <td><a href="{{ route('e-commerce.order',['id'=>$order->id]) }}" class="btn-small d-block">View</a></td>
                                                         </tr>
                                                         @endforeach
@@ -107,6 +107,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
+                                    
                                         </div>
                                     </div>
                                 </div>

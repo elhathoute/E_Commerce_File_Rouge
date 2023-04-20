@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GithubSocialiteController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\HomeController;
@@ -25,6 +26,9 @@ use App\Models\SubCategory;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*---------contact us---------*/
+Route::get('/contact',[ContactController::class,'contact'])->name('e-commerce.contact');
+Route::Post('/send-email',[ContactController::class,'sendEmail'])->name('e-commerce.send-email');
 
 /*add review*/
 Route::POST('/add_review',[ReviewController::class,'add_review'])->middleware('auth')->name('e-commerce.add_review');
@@ -126,9 +130,9 @@ Route::get('/about', function () {
     return view('e-commerce.about');
 })->name('e-commerce.about');
 
-Route::get('/contact', function () {
-    return view('e-commerce.contact');
-})->name('e-commerce.contact');
+// Route::get('/contact', function () {
+//     return view('e-commerce.contact');
+// })->name('e-commerce.contact');
 
 Route::get('/login', function () {
     return view('e-commerce.login');

@@ -52,8 +52,15 @@ class PaimentController extends Controller
     firstWhere('id','=',$id_size)->
     colors->firstWhere('id','=',$id_color)->
     pivot->where('product_id', '=', $id_product)->value('quantity');
-   
+
+    if($qte_update<$qte){
+        return back()->with('error-qte-stock','Sorry this quantity not available in stock ! available is =>'.$qte_update);
+    }else{
         $qte_update-=$qte;
+
+    }
+
+
 
         $order_db->product->sizes->firstWhere('id', '=', $id_size)
         ->colors->firstWhere('id', '=', $id_color)

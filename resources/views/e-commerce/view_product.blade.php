@@ -310,7 +310,7 @@
                             <hr>
                             <div class="more-detail">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-8">
                                         <ul class="product-more-infor mt-30 fw-bold">
                                             <li><span >Semelle Int :</span> {{ $product->detail_product->semelle_int }}</li>
                                             <li><span>Semelle Ext :</span> {{ $product->detail_product->semelle_ext }}</li>

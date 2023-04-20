@@ -6578,6 +6578,10 @@ h6.post-title {
   padding: 25px 0;
 }
 
+.header-style-1 .header-bottom-bg-color {
+    background-color:#C9EEFF;
+  }
+
 .header-style-3 .header-bottom-bg-color {
   background-color: #fff;
 }

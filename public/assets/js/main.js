@@ -159,6 +159,7 @@ $('#add_more_size_color').click(function(e){
 
     /*---------------Send data(add panier) to database---*/
    const Panier = [];
+
     $('.check-to-add-panier').on('change',function(e){
 
         if ($(this).prop('checked')) {
@@ -190,7 +191,9 @@ $('#add_more_size_color').click(function(e){
 
             console.log(Panier)
 
-          }else{
+          }
+          else
+          {
 
             const checkbox_id = $(this).attr('data-id'); // get the unique identifier of the checkbox
             const index_to_remove = Panier.findIndex(item => item.checkbox_id === checkbox_id); // find the index of the object with the corresponding checkbox_id
@@ -199,8 +202,24 @@ $('#add_more_size_color').click(function(e){
             }
             console.log(Panier);
           }
+
+
     })
 $('#add-to-panier').click(function(e){
+    var checked_box = false;
+    $('.check-to-add-panier').each(function(e){
+        if($(this).prop('checked') === true){
+            checked_box = true;
+            // to break (i use return false instead of break because break valid in for or while )
+            return false;
+        }
+      })
+      if(checked_box ===false){
+        alert('stop please check one or multiple!');
+      }
+      else{
+
+
      $.ajax({
           url: '/panier',
           method: 'GET',
@@ -208,7 +227,8 @@ $('#add-to-panier').click(function(e){
             panier: JSON.stringify(Panier)
           },
           success: function(response) {
-            console.log(response);
+
+            // console.log(response);
              setTimeout(function(){
                 // Redirect to /panier
                 window.location.href = '/panier';
@@ -218,6 +238,8 @@ $('#add-to-panier').click(function(e){
             console.error(error);
           }
         });
+
+    }
 
 })
 

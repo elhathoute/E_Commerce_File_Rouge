@@ -91,7 +91,20 @@ class PanierController extends Controller
     }
     // add wishlist
     public function add_to_wishlist($id){
+
         $product=Product::findOrFail($id);
+        // check if product exist before
+        $wishlistExist = false;
+        foreach($product->paniers as $panier){
+           if($panier->etat ==='wishlist'){
+            $wishlistExist=true;
+            break;
+           }
+        }
+        // if product exist in wishlist
+        if($wishlistExist){
+            return back();
+        }
 
         $panier=new Panier();
         // dd($product->sizes->first()->colors->where('pivot.product_id',$id)->first()->pivot->size_id);

@@ -14,6 +14,12 @@
             <div class="container mt-15 mb-15">
 
                 <div class="row">
+                    @if (Session::has('error-qte-stock'))
+                    <div class="col-md-12 alert alert-danger text-center fw-bold " role="alert">
+                        {{ Session::get('error-qte-stock') }}
+                    </div>
+                    @endif
+
                     <div class="col-lg-12 col-md-12 col-sm-12 my-2 ">
                         <div class="order_review">
                             <div class="mb-20">
