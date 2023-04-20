@@ -25,7 +25,7 @@
         @if (!$paniers->isEmpty())
 
         @foreach ($paniers as  $key=>$panier )
-
+        <span id="product-id-{{ $key }}" data-product-id="{{ $panier->product_id }}" >{{ $panier->product_id }}</span>
         <li>
             <div class="shopping-cart-img">
                 <a href="{{ route('e-commerce.view_product',['id'=>$panier->product_id]) }}"><img alt="Surfside Media" src="{{ asset('assets/imageProducts/'.$panier->product->images->first()->image ) }}"></a>
@@ -37,12 +37,12 @@
                   <div class="me-1"><input min="1" max="{{ $panier->quantity }}" type="number" name="" id="quantity-panier-{{ $key }}" value="{{ $panier->quantity  }}"></div>
 
                    <div class="me-1"> <span> × </span> <span id="price-panier-{{ $key }}">{{ $panier->price }}</span> DH = <span id="total-unique-{{ $key }}">{{ ($panier->quantity*$panier->price) }}  </span><span>DH</span></div>
-                   <div class="me-1"><input type="checkbox" class="all-checkbox" checked  name="" id="check-panier-{{ $key }}"></div>
+                   <div class="me-1"><input type="checkbox" class="all-checkbox" checked  name="" data-id={{ $key }} id="check-panier-{{ $key }}"></div>
 
                 </div>
                  </h4>
                 <pre class="text-secondary">{{ $panier->date }}</pre>
-                <span class="text-light fw-bold badge bg-dark">{{ $panier->size->size }}</span>
+                <span class="text-light fw-bold badge bg-dark" id="size-product-{{ $key }}" data-size="{{ $panier->size->id }}">{{ $panier->size->size }}</span>
                 {{-- <pre class="text-secondary"> --}}
                     <ul class="list-filter color-filter ">
 
@@ -50,7 +50,7 @@
                         <li
 
                         class="active"><a class="bg-light" href="#" >
-                            <span class="product-color-{{ $panier->color->name }}"></span></a></li>
+                            <span id="color-product-{{ $key }}" data-color="{{ $panier->color->id }}" class="product-color-{{ $panier->color->name }}"></span></a></li>
 
 
                     </ul>

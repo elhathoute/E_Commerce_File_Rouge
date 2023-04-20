@@ -32,9 +32,9 @@ Route::POST('/add_review',[ReviewController::class,'add_review'])->middleware('a
 // get subcategories for each category in db with ajax
 Route::get('/getSubCategory',[CategoryController::class,'get_sub_category']);
 // paiment create
-Route::get('/paiment/create/{id}',[PaimentController::class ,'create'])->middleware('auth')->name('e-commerce.paiment');
+Route::get('/orders',[PaimentController::class ,'orders'])->middleware('auth')->name('e-commerce.paiment');
 // paiment store (change from panier->order)
-Route::POST('/paiment/store_paiment/{id}',[PaimentController::class ,'store_paiment'])->middleware('auth')->name('e-commerce.store_paiment');
+Route::POST('/paiment/store_paiment',[PaimentController::class ,'store_paiment'])->middleware('auth')->name('e-commerce.store_paiment');
 
 // index
 Route::get('/',[HomeController::class ,'home'])->name('e-commerce.home');

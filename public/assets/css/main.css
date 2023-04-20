@@ -11,6 +11,10 @@
 body{
     background-color:#f5f5f5;
 }
+.padding_eight_all{
+    padding: 10px;
+    border-radius: 68px;
+}
 footer,header{
     background-color: white !important;
 }
@@ -5527,6 +5531,7 @@ h6.post-title {
 }
 
 .mobile-header-wrapper-style.sidebar-visible {
+    background-color: #95bbdc !important;
   visibility: visible;
   opacity: 1;
   -webkit-transform: translate(0, 0);

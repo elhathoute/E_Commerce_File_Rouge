@@ -226,41 +226,54 @@ $('#add-to-panier').click(function(e){
         //    loop for all li of ul of panier
 
         let Total=0;
-        console.log(Total);
+        let Orders=[];
         $('#order-panier').on('click',function(e){
 
             $('.panier li').each(function(index) {
 
-             if( $(`#check-panier-${index}`).prop('checked')){
+             if($(`#check-panier-${index}`).prop('checked')){
+                qte = parseInt($(`#quantity-panier-${index}`).val());
+                price =parseInt($(`#price-panier-${index}`).text());
+                size_id =parseInt($(`#size-product-${index}`).attr('data-size'));
+                color_id =parseInt($(`#color-product-${index}`).attr('data-color'));
+                product_id =parseInt($(`#product-id-${index}`).attr('data-product-id'));
+                checkbox_id = parseInt($(`#check-panier-${index}`).attr('data-id'));
 
              var total_unique_price = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
-             console.log(total_unique_price);
-            console.log(Total);
-             Total+=total_unique_price;
-             console.log(Total);
 
+             Total+=total_unique_price;
+
+             add_to_order={
+                'id':$.now(),
+                'checkbox_id': checkbox_id,
+                'quantity':qte,
+                'id_product':product_id,
+                'size_id':size_id,
+                'color_id':color_id,
+                'product_id':product_id,
+                'price_product':price,
+                'total':Total
+            }
+
+           Orders.push(add_to_order);
+           console.log(Orders);
+            // send this data to back-end
+            window.location='/orders?orders='+JSON.stringify(Orders);
             }
             });
-
-
         });
 
-
+            // calculate price of each product
            $('.panier li').each(function(index) {
 
             $(`#quantity-panier-${index}`).on('change',function(e){
                 var total_unique_price = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
-                console.log(total_unique_price);
-
 
                 let total_unique_price_input = $(`#quantity-panier-${index}`).val() * parseInt( $(`#price-panier-${index}`).text());
                 $(`#total-unique-${index}`).text(`${total_unique_price_input}`)
-
-
-
             })
 
-       
+
 
 
           });
@@ -274,11 +287,11 @@ $('#add-to-panier').click(function(e){
 /*--------------------------------------------------*/
 /*--------add loading image in my website---------*/
 
-    $("#loading").show();
-    $("#loading").css('z-index',100);
-    setTimeout(function() {
-        $("#loading").hide();
-    }, 1000);
+    // $("#loading").show();
+    // $("#loading").css('z-index',100);
+    // setTimeout(function() {
+    //     $("#loading").hide();
+    // }, 1000);
 
 
 /*-----------------end loading-------------*/

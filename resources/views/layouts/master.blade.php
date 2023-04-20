@@ -24,10 +24,10 @@
     {{-- sidebar --}}
    @include('e-commerce.sidebar')
 {{-- load --}}
-<div id="loading">
+{{-- <div id="loading">
     <img  src="{{ asset('assets/833.gif') }}" alt="Loading...">
 
-</div>
+</div> --}}
 {{-- Main --}}
 <main class="main">
     @yield('main')
