@@ -103,4 +103,4 @@ php artisan serve
 ```
 ## ScreenShot : 
 ## -login:
-![CHEESE!](C:\xampp\htdocs\e_commerce_file_rouge\public\assets\screenShots_app\login.png)
+![CHEESE!](./public/assets/screenShots_app/login.png)
