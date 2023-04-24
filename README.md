@@ -23,3 +23,81 @@ Bienvenue sur Myshoes, votre destination en ligne pour trouver les chaussures pa
 
 ## Maquettage : 
 - Figma
+
+## installation 
+
+1. Clone the repository : 
+
+```git clone https://github.com/elhathoute/E_Commerce_File_Rouge.git```
+
+
+
+2. Install the project dependencies using Composer:
+
+ ```
+ 
+cd E_Commerce_File_Rouge
+composer install
+
+```
+
+
+3. Copy the .env.example file to .env and update the database configuration:
+
+```
+create ficher .env and go to .env-exemple
+cp .env.example .env
+
+
+
+```
+
+
+4. Generate the application key:
+
+
+```
+
+php artisan key:generate
+
+---clear cache and config----
+php artisan cache:clear
+php artisan config:clear
+
+
+```
+
+
+5. Run the database migrations:
+
+```
+
+php artisan migrate
+
+
+```
+
+
+
+6. Run the database migrations:
+
+
+```
+
+php artisan db:seed
+
+
+```
+
+
+## Usage : 
+
+To start the application, run the following command:
+
+
+```
+
+php artisan serve
+
+
+```
