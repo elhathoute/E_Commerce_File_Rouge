@@ -1,5 +1,9 @@
 <p align="center"><b>My Shoes</b></a></p>
 
+## ScreenShot : 
+## -login:
+![login](https://user-images.githubusercontent.com/79522043/234056934-215f29c8-84b5-4695-8525-d0eb7a38b4f5.png)
+
 ## Présentation de Projet
 
 Bienvenue sur Myshoes, votre destination en ligne pour trouver les chaussures parfaites pour tous les membres de votre famille. Nous proposons une large sélection de chaussures pour homme, femme et enfant, avec des options pour tous les styles et toutes les occasions. Que vous recherchiez des chaussures de sport, des bottes d'hiver ou des chaussures habillées, vous trouverez tout ce dont vous avez besoin sur Myshoes. Avec une expérience d'achat en ligne simple et sécurisée, nous offrons à nos clients une livraison rapide et gratuit et un service clientèle exceptionnel.
@@ -101,7 +105,4 @@ php artisan serve
 
 
 ```
-## ScreenShot : 
-## -login:
-![login](https://user-images.githubusercontent.com/79522043/234056934-215f29c8-84b5-4695-8525-d0eb7a38b4f5.png)
 
