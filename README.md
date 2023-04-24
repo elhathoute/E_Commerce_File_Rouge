@@ -1,19 +1,17 @@
-<p align="center"><b>YouBiblio</b></a></p>
+<p align="center"><b>My Shoes</b></a></p>
 
 ## Présentation de Projet
 
-Nous sommes ravis de vous présenter notre site web dédié à la lecture et à l'apprentissage. Notre bibliothèque est spécialement conçue pour les étudiants de l'école YouCode.
-  Vous y trouverez une vaste sélection de livres, allant des classiques de la littérature aux ouvrages spécialisés dans les technologies de développements , de la communication et l'information.
-   Notre plateforme vous permet de rechercher facilement des livres par titre, 
-Vous pouvez également consulter la disponibilité des livres en temps réel et réserver ceux qui vous intéressent.
+Bienvenue sur Myshoes, votre destination en ligne pour trouver les chaussures parfaites pour tous les membres de votre famille. Nous proposons une large sélection de chaussures pour homme, femme et enfant, avec des options pour tous les styles et toutes les occasions. Que vous recherchiez des chaussures de sport, des bottes d'hiver ou des chaussures habillées, vous trouverez tout ce dont vous avez besoin sur Myshoes. Avec une expérience d'achat en ligne simple et sécurisée, nous offrons à nos clients une livraison rapide et gratuit et un service clientèle exceptionnel.
 
 ## Les technologies utilisées:
 
 - HTML
 - Blade
 - CSS
-- Javascript
+- Javascript / JQUERY
 - PHP,Laravel
+- Mysql
 
 ## Conception UML : 
 - Diagramme de Classes
@@ -21,7 +19,6 @@ Vous pouvez également consulter la disponibilité des livres en temps réel et 
 - Diagramme de Séquence
 
 ## Planification : 
-- User Stories (Planning Poker)
 - Trello
 
 ## Maquettage : 
