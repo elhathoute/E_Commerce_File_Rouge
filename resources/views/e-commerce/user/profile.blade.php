@@ -58,9 +58,75 @@
                                         <div class="card-header">
                                             <h5 class="mb-0">Hello <strong class="text-decoration-underline  ">{{ auth()->user()->name }}</strong> </h5>
                                         </div>
+                                        @if (auth()->user()->role=='user')
                                         <div class="card-body">
                                             <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a></p>
                                         </div>
+                                        @else
+                                        <div class="card-body">
+                                            @php
+                                            $count_products = App\Models\Product::count();
+                                            $count_categories = App\Models\Category::count();
+                                            $count_sub_categories = App\Models\SubCategory::count();
+                                            $count_colors = App\Models\Color::count();
+                                            $count_sizes= App\Models\Size::count();
+                                            $count_reviews= App\Models\Review::count();
+                                            $count_brands= App\Models\Brande::count();
+                                            $count_orders = App\Models\Panier::where('etat','=','order')->count();
+                                        @endphp
+                                           <div class="row mb-3 ">
+
+
+                                            <div class="col-md-3 ">
+
+
+                                                <h3 class="text-center">Products</h3>
+
+                                                <p class="fw-bold text-center">{{ $count_products }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">categories</h3>
+                                                <p class="fw-bold text-center">{{  $count_categories }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">SubCategories</h3>
+                                                <p class="fw-bold text-center">{{  $count_sub_categories }}</p>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">Orders</h3>
+                                                <p class="fw-bold text-center">{{  $count_orders }}</p>
+
+                                            </div>
+                                           </div>
+                                           <hr>
+                                           <div class="row mt-3">
+
+
+                                            <div class="col-md-3">
+
+
+                                                <h3 class="text-center">Colors</h3>
+
+                                                <p class="fw-bold text-center">{{ $count_colors }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">Sizes</h3>
+                                                <p class="fw-bold text-center">{{   $count_sizes }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">Reviews</h3>
+                                                <p class="fw-bold text-center">{{   $count_reviews }}</p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h3 class="text-center">Brands</h3>
+                                                <p class="fw-bold text-center">{{   $count_brands }}</p>
+                                            </div>
+
+                                           </div>
+                                        </div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 @php
@@ -107,7 +173,7 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                    
+
                                         </div>
                                     </div>
                                 </div>
