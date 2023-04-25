@@ -144,8 +144,9 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                              @guest
                                 <li class="link"><a  class="a-link"href="{{ route('e-commerce.contact') }}">Contact</a></li>
+
+                              @guest
                                 <li class="link">
                                     <i class="fi-rs-key"></i> <a class="a-link" href="{{ route('e-commerce.login') }}"> Log In </a>
 

@@ -17,9 +17,10 @@ class Admin
     public function handle(Request $request, Closure $next)
     {
         // check if user authent admin or not
-        if(!auth()->check() || auth()->user()->role=='user'){
+        if(!auth()->check() || auth()->user()->role==='user'){
             // not authorized
-            abort(403,'Sorry You are Not Admin');
+
+            abort(403,'Sorry You are Not Admin or not authenticated');
         }
         return $next($request);
     }
