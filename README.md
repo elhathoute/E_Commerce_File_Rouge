@@ -1,4 +1,6 @@
-<p align="center"><b>My Shoes</b></a></p>
+<h1 align="center"><b>My Shoes</b></a></h1>
+
+
 
 ## Présentation de Projet
 
@@ -101,6 +103,3 @@ php artisan serve
 
 
 ```
-## ScreenShot : 
-## -login:
-![image description](./public/assets/screenShots_app/login.png)
